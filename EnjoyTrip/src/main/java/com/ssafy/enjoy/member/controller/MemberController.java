@@ -72,7 +72,7 @@ public class MemberController {
 		}
 		return result;
 	}
-	@GetMapping("/idCheck")
+	@PostMapping("/idCheck")
 	public Map<String, String> idCheck(@RequestBody String id){
 		Map<String, String> result = new HashMap<String, String>();
 		if(id==null) {
