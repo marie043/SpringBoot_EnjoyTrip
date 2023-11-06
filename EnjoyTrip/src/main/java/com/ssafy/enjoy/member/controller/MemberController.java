@@ -94,4 +94,11 @@ public class MemberController {
 		}
 		return result;
 	}
+	
+	@PostMapping("/join")
+	public Map<String, String> join(@RequestBody MemberDto member){
+		Map<String, String> result = new HashMap<String, String>();
+		
+		return result;
+	}
 }
