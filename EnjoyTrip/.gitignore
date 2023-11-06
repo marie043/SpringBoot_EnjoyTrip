@@ -8,6 +8,11 @@ target/
 .apt_generated
 .classpath
 .factorypath
+<<<<<<< HEAD
+=======
+.settings
+.springBeans
+>>>>>>> 4d399c97d1949ea787e81dc58fc8a49be32521b1
 .sts4-cache
 
 ### IntelliJ IDEA ###
