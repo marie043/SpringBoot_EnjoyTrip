@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.enjoy.member.model.MemberDto;
+
 @RestController
 @RequestMapping("/user")
 public class MemberController {
@@ -26,6 +28,16 @@ public class MemberController {
 				result.put("msg", "NO");
 				result.put("detail", "no matching id");
 			}
+		}
+		return result;
+	}
+	public Map<String, String> Member(@RequestBody MemberDto member, HttpSession session){
+		Map<String, String> result = new HashMap<String, String>();
+		if(member.getUserId()==null||member.getUserPwd()==null) {
+			result.put("msg", "NO");
+			result.put("detail", "no id or no pw");
+		}else {
+			
 		}
 		return result;
 	}
