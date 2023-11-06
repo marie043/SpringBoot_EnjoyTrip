@@ -36,7 +36,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberDto loginMember(MemberDto member, String ip) throws Exception {
 		try {
-			LoginTry loginTry = logintryMapper.readLoginTry(member.getUserId(), ip);
+			LoginTry loginTry = logintryMapper.readLoginTry(ip);
 			System.out.println(loginTry);
 			Date today = new Date();
 			Time now = new Time(today.getHours(), today.getMinutes() - 30, today.getSeconds());
@@ -59,6 +59,16 @@ public class MemberServiceImpl implements MemberService {
 			e.printStackTrace();
 			throw new Exception("Server error");
 		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new Exception("Server error");
+		}
+	}
+
+	@Override
+	public int idCheck(String id) throws Exception {
+		try {
+			return memberMapper.idCheck(id);
+		}catch(SQLException e) {
 			e.printStackTrace();
 			throw new Exception("Server error");
 		}

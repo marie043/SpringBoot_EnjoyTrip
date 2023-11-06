@@ -6,4 +6,6 @@ public interface MemberService {
 
 	MemberDto loginMember(MemberDto member, String ip) throws Exception;
 
+	int idCheck(String id) throws Exception;
+
 }

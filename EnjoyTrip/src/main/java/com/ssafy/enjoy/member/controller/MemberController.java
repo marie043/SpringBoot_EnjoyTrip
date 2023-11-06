@@ -72,4 +72,26 @@ public class MemberController {
 		}
 		return result;
 	}
+	@GetMapping("/idCheck")
+	public Map<String, String> idCheck(@RequestBody String id){
+		Map<String, String> result = new HashMap<String, String>();
+		if(id==null) {
+			result.put("msg", "NO");
+			result.put("detail", "no id");
+		}
+		try {
+			if(memberService.idCheck(id)==0) {
+				result.put("msg", "OK");
+				result.put("detail", "사용가능한 id");
+			}else {
+				result.put("msg", "NO");
+				result.put("detail", "id 중복");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			result.put("msg", "No");
+			result.put("detail", e.getMessage());
+		}
+		return result;
+	}
 }
