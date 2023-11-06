@@ -13,9 +13,9 @@ CREATE table members (
   `idx` int auto_increment not null,
   `user_id` varchar(16),
   `retry` int default 0,
-  `last_try` timestamp not null default current_timestamp,
-  `last_success` timestamp default null,
-  `client_ip` varchar(15),
+  `last_try_date` date,
+  `last_try_time` time,
+  `client_ip` varchar(15) not null,
   primary key(`idx`,`client_ip`),
   foreign key(`user_id`) references enjoytrip.members(`user_id`)
   );
@@ -33,6 +33,7 @@ create table id_info(
 `id` varchar(16) not null,
 `id_salt` varchar(500) not null,
 primary key(`id`)); 
+
 create table key_info(
 `hashed_id` varchar(500) not null,
 `pw_salt` varchar(500) not null,

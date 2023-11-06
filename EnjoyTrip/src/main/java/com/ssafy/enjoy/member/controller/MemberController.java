@@ -3,6 +3,7 @@ package com.ssafy.enjoy.member.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,14 +49,15 @@ public class MemberController {
 	}
 
 	@PostMapping("/login")
-	public Map<String, String> login(@RequestBody MemberDto member, HttpSession session){
+	public Map<String, String> login(@RequestBody MemberDto member, HttpServletRequest request, HttpSession session){
 		Map<String, String> result = new HashMap<String, String>();
+		String ip = request.getRemoteAddr();
 		if(member.getUserId()==null||member.getUserPwd()==null) {
 			result.put("msg", "NO");
 			result.put("detail", "no id or no pw");
 		}else {
 			try {
-				member = memberService.loginMember(member);
+				member = memberService.loginMember(member, ip);
 				session.setAttribute("userinfo", member);
 				result.put("msg", "OK");
 				result.put("detail", "login success");
