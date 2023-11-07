@@ -7,11 +7,6 @@ public class Member {
 	private String emailId;
 	private String emailDomain;
 	private String joinDate;
-	@Override
-	public String toString() {
-		return "MemberDto [userId=" + userId + ", userName=" + userName + ", userPassword=" + userPassword + ", emailId="
-				+ emailId + ", emailDomain=" + emailDomain + ", joinDate=" + joinDate + "]";
-	}
 	public String getUserId() {
 		return userId;
 	}
@@ -24,11 +19,11 @@ public class Member {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getUserPwd() {
+	public String getUserPassword() {
 		return userPassword;
 	}
-	public void setUserPwd(String userPwd) {
-		this.userPassword = userPwd;
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
 	}
 	public String getEmailId() {
 		return emailId;
@@ -48,4 +43,10 @@ public class Member {
 	public void setJoinDate(String joinDate) {
 		this.joinDate = joinDate;
 	}
+	@Override
+	public String toString() {
+		return "Member [userId=" + userId + ", userName=" + userName + ", userPassword=" + userPassword + ", emailId="
+				+ emailId + ", emailDomain=" + emailDomain + ", joinDate=" + joinDate + "]";
+	}
+	
 }

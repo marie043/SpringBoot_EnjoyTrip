@@ -11,4 +11,6 @@ public interface KeyInfoMapper {
 
 	KeyInfo readKeyInfo(String hashed_id) throws SQLException;
 
+	void createKeyInfo(KeyInfo keyInfo) throws SQLException;
+
 }

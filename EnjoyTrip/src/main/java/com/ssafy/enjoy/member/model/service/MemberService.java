@@ -8,4 +8,6 @@ public interface MemberService {
 
 	int idCheck(String id) throws Exception;
 
+	void joinMember(Member member) throws Exception;
+
 }

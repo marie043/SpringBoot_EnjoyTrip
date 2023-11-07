@@ -3,16 +3,16 @@ const session_check_url = 'http://'+ip+'/EnjoyTrip/user/session';
 
 sessionCheck();
 changePage('home-page');
-document.getElementById('home-link').addEeventListener('click', function(){
+document.getElementById('home-link').addEventListener('click', function(){
 	changePage('home-page');
 });
-document.getElementById('map-link').addEeventListener('click', function(){
+document.getElementById('map-link').addEventListener('click', function(){
 	changePage('map-page')
 });
-document.getElementById('board-link').addEeventListener('click', function(){
+document.getElementById('board-link').addEventListener('click', function(){
 	changePage('board-page');
 });
-document.getElementById('update-link').addEeventListener('click', function(){
+document.getElementById('update-link').addEventListener('click', function(){
 	changePage('update-page');
 });
 document.querySelectorAll('.close-area').forEach(element=>{
@@ -39,8 +39,10 @@ function sessionCheck(){
 		document.getElementById('after-login').style.display='none';
 		return;
 	}	
-	fetch(session_check_url+`?userId=${userId}&userPassword=${userPassword}`, {
-		method: "GET",
+	fetch(session_check_url, {
+		method: "POST",
+		headers: { 'Content-Type': 'application/json', },
+		body: JSON.stringify({userId, userPassword}),
 	}).then(function(res){
 		return res.json();
 	}).then(function(obj){

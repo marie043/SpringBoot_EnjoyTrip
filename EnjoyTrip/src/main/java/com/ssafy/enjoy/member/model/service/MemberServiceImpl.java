@@ -4,6 +4,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.Date;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,13 +37,17 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member loginMember(Member member, String ip) throws Exception {
 		try {
-			LoginTry loginTry = logintryMapper.readLoginTry(ip);
-			System.out.println(loginTry);
-			Date today = new Date();
-			Time now = new Time(today.getHours(), today.getMinutes() - 30, today.getSeconds());
-			if (loginTry.getRetry() >= 5 && today == loginTry.getLast_try_date()
-					&& loginTry.getLast_try_time().after(now)) {
-				throw new Exception("login try limit 30min");
+			LoginTry loginTry = logintryMapper.readLoginTry(ip, member.getUserId());
+			if (loginTry != null) {
+				Date today = new Date();
+				Time now = new Time(today.getHours(), today.getMinutes() - 30, today.getSeconds());
+				if (loginTry.getRetry() >= 5 && today == loginTry.getLast_try_date()
+						&& loginTry.getLast_try_time().after(now)) {
+					throw new Exception("login try limit 30min");
+				}
+			} else {
+				logintryMapper.createLogintry(ip, member.getUserId());
+				loginTry = logintryMapper.readLoginTry(ip, member.getUserId());
 			}
 			if (memberMapper.idCheck(member.getUserId()) != 1) {
 				throw new Exception("no such user");
@@ -52,9 +57,15 @@ public class MemberServiceImpl implements MemberService {
 			String hashed_id = OpenCrypt.byteArrayToHex(OpenCrypt.getSHA256(member.getUserId(), idInfo.getSalt()));
 			KeyInfo keyInfo = keyInfoMapper.readKeyInfo(hashed_id);
 			byte[] key = OpenCrypt.hexToByteArray(keyInfo.getKey());
-			String cUserPwd = OpenCrypt.aesEncrypt(member.getUserPwd(), key);
+			String cUserPwd = OpenCrypt.aesEncrypt(member.getUserPassword(), key);
 			String hashed_cUserPwd = OpenCrypt.byteArrayToHex(OpenCrypt.getSHA256(cUserPwd, keyInfo.getSalt()));
-			return memberMapper.readMember(member.getUserId(), hashed_cUserPwd);
+			member = memberMapper.readMember(member.getUserId(), hashed_cUserPwd);
+			if (member == null) {
+				logintryMapper.updateLointryFail(loginTry.getClient_ip());
+				throw new Exception("wrong password");
+			}
+			logintryMapper.updateLogintrySuccess();
+			return member;
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 			throw new Exception("Server error");
@@ -68,7 +79,38 @@ public class MemberServiceImpl implements MemberService {
 	public int idCheck(String id) throws Exception {
 		try {
 			return memberMapper.idCheck(id);
-		}catch(SQLException e) {
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new Exception("Server error");
+		}
+	}
+
+	@Override
+	public void joinMember(Member member) throws Exception {
+		try {
+			if (idCheck(member.getUserId()) != 0) {
+				throw new Exception("이미 존재하는 사용자");
+			}
+			IdInfo idInfo = new IdInfo();
+			idInfo.setId(member.getUserId());
+			idInfo.setSalt(UUID.randomUUID().toString());
+			byte[] hashed_id_byte= OpenCrypt.getSHA256(idInfo.getId(), idInfo.getSalt());
+			String hashed_id = OpenCrypt.byteArrayToHex(hashed_id_byte);
+			KeyInfo keyInfo = new KeyInfo();
+			keyInfo.setHashed_id(hashed_id);
+			byte[] key_byte = OpenCrypt.generateKey("AES", 128);
+			keyInfo.setKey(OpenCrypt.byteArrayToHex(key_byte));
+			keyInfo.setSalt(UUID.randomUUID().toString());
+			String key_crypt = OpenCrypt.aesEncrypt(member.getUserPassword(), key_byte);
+			byte[] key_hashed_byte = OpenCrypt.getSHA256(key_crypt, keyInfo.getSalt());
+			member.setUserPassword(OpenCrypt.byteArrayToHex(key_hashed_byte));
+			memberMapper.createMember(member);
+			idInfoMapper.createIdInfo(idInfo);
+			keyInfoMapper.createKeyInfo(keyInfo);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			throw new Exception("Server error");
+		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new Exception("Server error");
 		}

@@ -6,6 +6,6 @@
 	<select id="readLoginTry" parameterType="String" resultType="loginTry">
 		select `user_id`, `client_ip`, `last_try_date`, `last_try_time`, `retry`
 		from login_try
-		where `user_id`=#{id}
+		where `client_ip`= #{ip} and `user_id`=#{id}
 	</select>
 </mapper>

@@ -23,10 +23,10 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 
-	@GetMapping("/session")
+	@PostMapping("/session")
 	public Map<String, String> sessionCheck(@RequestBody Member member, HttpSession session) {
 		Map<String, String> result = new HashMap<String, String>();
-		if (member == null||member.getUserId()==null||member.getUserPwd()==null) {
+		if (member == null||member.getUserId()==null||member.getUserPassword()==null) {
 			result.put("msg", "NO");
 			result.put("detail", "no input id");
 		} else {
@@ -34,7 +34,7 @@ public class MemberController {
 			if(userinfo==null) {
 				result.put("msg", "NO");
 				result.put("detail", "already logout or session expired");
-			}else if (member.getUserId().equals(userinfo.getUserId())&&member.getUserPwd().equals(userinfo.getUserPwd())) {
+			}else if (member.getUserId().equals(userinfo.getUserId())&&member.getUserPassword().equals(userinfo.getUserPassword())) {
 				result.put("msg", "OK");
 				result.put("detail", "login success");
 				result.put("name", userinfo.getUserName());
@@ -52,7 +52,7 @@ public class MemberController {
 	public Map<String, String> login(@RequestBody Member member, HttpServletRequest request, HttpSession session){
 		Map<String, String> result = new HashMap<String, String>();
 		String ip = request.getRemoteAddr();
-		if(member.getUserId()==null||member.getUserPwd()==null) {
+		if(member.getUserId()==null||member.getUserPassword()==null) {
 			result.put("msg", "NO");
 			result.put("detail", "no id or no pw");
 		}else {
@@ -98,7 +98,20 @@ public class MemberController {
 	@PostMapping("/join")
 	public Map<String, String> join(@RequestBody Member member){
 		Map<String, String> result = new HashMap<String, String>();
-		
+		if(member.getUserId()==null||member.getUserPassword()==null||member.getEmailId()==null||member.getEmailDomain()==null||member.getUserName()==null) {
+			result.put("msg", "NO");
+			result.put("detail", "모든 정보를 입력해 주세요");
+		}else {
+			try {
+				memberService.joinMember(member);
+				result.put("msg", "OK");
+				result.put("detail", "회원가입 성공");
+			}catch(Exception e) {
+				e.printStackTrace();
+				result.put("msg", "NO");
+				result.put("detail", e.getMessage());
+			}
+		}
 		return result;
 	}
 	
