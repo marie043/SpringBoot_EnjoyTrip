@@ -41,10 +41,10 @@
 
 		<div class="header__right">
 			<div id="before-login">
-				<a href="#" id="loginButton">로그인</a>
-				<a href="#" id="registerButton">회원가입</a>
+				<a href="#" id="login-a" data-bs-toggle="modal" data-bs-target="#login-modal">로그인</a>
+				<a href="#" id="register-a">회원가입</a>
 			</div>	
-			<div>
+			<div id="after-login">
 				<div id="profile-dropdown" class="hidden">
 					<img id="profile" src="./img/profile.png"
 						alt="profile" />
@@ -188,8 +188,7 @@
 		</header>
 
 		<!-- login modal body -->
-		<form id="login-modal___modal_body_" class="modal-body" method="post">
-			<input type="hidden" name="action" value="login" />
+		<div id="login-modal___modal_body_" class="modal-body">
 			<div class="container-fluid">
 				<div class="row mb-1">
 					<div class="col-12 col-md-3 text-md-right">
@@ -224,7 +223,7 @@
 					</div>
 				</div>
 			</div>
-		</form>
+		</div>
 
 		<!-- login modal footer -->
 		<footer id="login-modal__modal_footer_" class="modal-footer">
@@ -238,8 +237,23 @@
 	</div>
 </div>
 <div class="container" id="contents">
-<img src="./img/sea.png" alt="sea"/>
+<div class="content" id="home-page"><img src="./img/sea.png" alt="sea"/></div>
+<div class="content" id="register-page">
+
+</div>
+<div class="content" id="update-page">
+
+</div>
+<div class="content" id="board-page">
+
+</div>
+<div class="content" id="map-page">
+
+</div>
 </div>
 </body>
 <script type="text/javascript" src="./js/cookie.js"></script>
+<script type="text/javascript" src="./js/index.js"></script>
+<script type="text/javascript" src="./js/login.js"></script>
+<script type="text/javascript" src="./js/register.js"></script>
 </html>
