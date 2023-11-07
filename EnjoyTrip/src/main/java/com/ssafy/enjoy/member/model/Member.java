@@ -1,6 +1,6 @@
 package com.ssafy.enjoy.member.model;
 
-public class MemberDto {
+public class Member {
 	private String userId;
 	private String userName;
 	private String userPwd;

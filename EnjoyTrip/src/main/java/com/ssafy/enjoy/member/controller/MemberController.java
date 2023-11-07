@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.enjoy.member.model.MemberDto;
+import com.ssafy.enjoy.member.model.Member;
 import com.ssafy.enjoy.member.model.service.MemberService;
 
 @RestController
@@ -24,13 +24,13 @@ public class MemberController {
 	MemberService memberService;
 
 	@GetMapping("/session")
-	public Map<String, String> sessionCheck(@RequestBody MemberDto member, HttpSession session) {
+	public Map<String, String> sessionCheck(@RequestBody Member member, HttpSession session) {
 		Map<String, String> result = new HashMap<String, String>();
 		if (member == null||member.getUserId()==null||member.getUserPwd()==null) {
 			result.put("msg", "NO");
 			result.put("detail", "no input id");
 		} else {
-			MemberDto userinfo = (MemberDto) session.getAttribute("userinfo");
+			Member userinfo = (Member) session.getAttribute("userinfo");
 			if(userinfo==null) {
 				result.put("msg", "NO");
 				result.put("detail", "already logout or session expired");
@@ -49,7 +49,7 @@ public class MemberController {
 	}
 
 	@PostMapping("/login")
-	public Map<String, String> login(@RequestBody MemberDto member, HttpServletRequest request, HttpSession session){
+	public Map<String, String> login(@RequestBody Member member, HttpServletRequest request, HttpSession session){
 		Map<String, String> result = new HashMap<String, String>();
 		String ip = request.getRemoteAddr();
 		if(member.getUserId()==null||member.getUserPwd()==null) {
@@ -96,7 +96,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("/join")
-	public Map<String, String> join(@RequestBody MemberDto member){
+	public Map<String, String> join(@RequestBody Member member){
 		Map<String, String> result = new HashMap<String, String>();
 		
 		return result;

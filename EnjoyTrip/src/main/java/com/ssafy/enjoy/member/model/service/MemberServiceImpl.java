@@ -8,10 +8,10 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.enjoy.member.model.IdInfoDto;
+import com.ssafy.enjoy.member.model.IdInfo;
 import com.ssafy.enjoy.member.model.KeyInfo;
 import com.ssafy.enjoy.member.model.LoginTry;
-import com.ssafy.enjoy.member.model.MemberDto;
+import com.ssafy.enjoy.member.model.Member;
 import com.ssafy.enjoy.member.model.mapper.IdInfoMapper;
 import com.ssafy.enjoy.member.model.mapper.KeyInfoMapper;
 import com.ssafy.enjoy.member.model.mapper.LogintryMapper;
@@ -34,7 +34,7 @@ public class MemberServiceImpl implements MemberService {
 	KeyInfoMapper keyInfoMapper;
 
 	@Override
-	public MemberDto loginMember(MemberDto member, String ip) throws Exception {
+	public Member loginMember(Member member, String ip) throws Exception {
 		try {
 			LoginTry loginTry = logintryMapper.readLoginTry(ip);
 			System.out.println(loginTry);
@@ -47,7 +47,7 @@ public class MemberServiceImpl implements MemberService {
 			if (memberMapper.idCheck(member.getUserId()) != 1) {
 				throw new Exception("no such user");
 			}
-			IdInfoDto idInfo = idInfoMapper.readIdInfo(member.getUserId());
+			IdInfo idInfo = idInfoMapper.readIdInfo(member.getUserId());
 			System.out.println(idInfo);
 			String hashed_id = OpenCrypt.byteArrayToHex(OpenCrypt.getSHA256(member.getUserId(), idInfo.getSalt()));
 			KeyInfo keyInfo = keyInfoMapper.readKeyInfo(hashed_id);

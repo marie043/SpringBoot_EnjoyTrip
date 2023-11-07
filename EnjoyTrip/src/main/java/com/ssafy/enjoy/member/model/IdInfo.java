@@ -1,6 +1,6 @@
 package com.ssafy.enjoy.member.model;
 
-public class IdInfoDto {
+public class IdInfo {
 	private String id;
 	private String salt;
 	@Override
