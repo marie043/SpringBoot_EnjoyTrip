@@ -9,6 +9,6 @@ import com.ssafy.enjoy.member.model.IdInfo;
 @Mapper
 public interface IdInfoMapper {
 
-	IdInfo readIdInfo(String userId) throws SQLException;
+	IdInfo readIdInfo(String id) throws SQLException;
 
 }
