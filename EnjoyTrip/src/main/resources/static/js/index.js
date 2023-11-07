@@ -12,6 +12,18 @@ document.getElementById('map-link').addEeventListener('click', function(){
 document.getElementById('board-link').addEeventListener('click', function(){
 	changePage('board-page');
 });
+document.getElementById('update-link').addEeventListener('click', function(){
+	changePage('update-page');
+});
+document.querySelectorAll('.close-area').forEach(element=>{
+	element.addEventListener('click', closeModal);
+});
+document.getElementById('login-a').addEventListener('click', function(){
+	document.getElementById('login-modal').style.display='flex';
+});
+document.getElementById('join-a').addEventListener('click', function(){
+	document.getElementById('join-modal').style.display='flex';
+});
 
 function sessionCheck(){
 	let userId = getCookie('id');
@@ -48,4 +60,8 @@ function sessionCheck(){
 function changePage(pageId){
 	document.querySelectorAll('content').forEach(element=>{element.style.display='none'});
 	document.getElementById(pageId).style.display='block';
+}
+function closeModal(){
+	document.getElementById('login-modal').style.display='none';
+	document.getElementById('join-modal').style.display='none';
 }
