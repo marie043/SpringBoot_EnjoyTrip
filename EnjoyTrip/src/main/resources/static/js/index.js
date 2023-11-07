@@ -20,8 +20,8 @@ document.querySelectorAll('.close-area').forEach(element=>{
 });
 document.getElementById('login-a').addEventListener('click', function(){
 	document.getElementById('login-modal').style.display='flex';
-	let id = getCookie('id');
-	let pw = getCookie('pw');
+	const id = getCookie('id');
+	const pw = getCookie('pw');
 	if(id!=null&&pw!=null){
 		document.getElementById('login-id').value = id;
 		document.getElementById('login-password').value = pw;
@@ -44,15 +44,18 @@ function sessionCheck(){
 	}).then(function(res){
 		return res.json();
 	}).then(function(obj){
-		let msg = obj['msg'];
-		let detail = obj['detail'];
-		let name = obj['name'];
-		let email_id = obj['eamil_id'];
-		let email_domain = obj['email_domain'];
+		const msg = obj['msg'];
+		const detail = obj['detail'];
+		const name = obj['name'];
+		const email_id = obj['eamil_id'];
+		const email_domain = obj['email_domain'];
 		if(msg=="OK"){
 			document.getElementById('before-login').style.display='none';
 			document.getElementById('after-login').style.display='block';
-			document.getElementById('user-id-nim').innerText = name;
+			document.getElementById('user-name-nim').innerText = name;
+			document.getElementById('login-info-name').value = name;
+			document.getElementById('login-info-email-id').value = email_id;
+			document.getElementById('login-info-email-domain').value = email_domain;
 			alert(detail);
 			return;
 		}else{

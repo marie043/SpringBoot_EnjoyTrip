@@ -32,7 +32,10 @@ document.getElementById('login-button').addEventListener('click', function(){
 			closeModal();
 			document.getElementById('before-login').style.display='none';
 			document.getElementById('after-login').style.display='block';
-			document.getElementById('user-id-nim').innerText = name;
+			document.getElementById('user-name-nim').innerText = name;
+			document.getElementById('login-info-name').value = name;
+			document.getElementById('login-info-email-id').value = email_id;
+			document.getElementById('login-info-email-domain').value = email_domain;
 		}
 		alert(detail);
 	});

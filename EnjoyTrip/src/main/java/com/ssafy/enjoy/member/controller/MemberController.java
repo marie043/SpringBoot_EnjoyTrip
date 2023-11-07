@@ -101,4 +101,13 @@ public class MemberController {
 		
 		return result;
 	}
+	
+	@GetMapping("/logout")
+	public Map<String, String> logout(HttpSession session){
+		Map<String, String> result = new HashMap<String, String>();
+		session.invalidate();
+		result.put("msg", "OK");
+		result.put("detail", "로그아웃 되었습니다.");
+		return result;
+	}
 }
