@@ -9,8 +9,8 @@ import com.ssafy.enjoy.member.model.Member;
 @Mapper
 public interface MemberMapper {
 
-	int idCheck(String userId) throws Exception ;
+	int idCheck(String id) throws Exception ;
 
-	Member readMember(String userId, String hashed_cUserPwd) throws SQLException;
+	Member readMember(String id, String pwd) throws SQLException;
 
 }

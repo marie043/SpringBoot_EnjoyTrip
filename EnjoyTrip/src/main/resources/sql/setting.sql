@@ -1,12 +1,12 @@
 create database enjoytrip;
 use enjoytrip;
 CREATE table members (
-  `user_id` VARCHAR(16) NOT NULL,
-  `user_name` VARCHAR(20) NOT NULL,
-  `user_password` VARCHAR(500) NOT NULL,
-  `email_id` VARCHAR(20) NULL DEFAULT NULL,
-  `email_domain` VARCHAR(45) NULL DEFAULT NULL,
-  `join_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `userId` VARCHAR(16) NOT NULL,
+  `userName` VARCHAR(20) NOT NULL,
+  `userPassword` VARCHAR(500) NOT NULL,
+  `emailId` VARCHAR(20) NULL DEFAULT NULL,
+  `emailDomain` VARCHAR(45) NULL DEFAULT NULL,
+  `joinDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`));
 
   create table login_try(
@@ -31,13 +31,13 @@ CREATE table members (
   );
 create table id_info(
 `id` varchar(16) not null,
-`id_salt` varchar(500) not null,
+`salt` varchar(500) not null,
 primary key(`id`)); 
 
 create table key_info(
 `hashed_id` varchar(500) not null,
-`pw_salt` varchar(500) not null,
-`pw_key` varchar(500) not null,
+`salt` varchar(500) not null,
+`key` varchar(500) not null,
 primary key(`hashed_id`));
 
 create table comment_list(

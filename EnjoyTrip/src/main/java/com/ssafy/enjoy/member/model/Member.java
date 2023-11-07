@@ -3,13 +3,13 @@ package com.ssafy.enjoy.member.model;
 public class Member {
 	private String userId;
 	private String userName;
-	private String userPwd;
+	private String userPassword;
 	private String emailId;
 	private String emailDomain;
 	private String joinDate;
 	@Override
 	public String toString() {
-		return "MemberDto [userId=" + userId + ", userName=" + userName + ", userPwd=" + userPwd + ", emailId="
+		return "MemberDto [userId=" + userId + ", userName=" + userName + ", userPassword=" + userPassword + ", emailId="
 				+ emailId + ", emailDomain=" + emailDomain + ", joinDate=" + joinDate + "]";
 	}
 	public String getUserId() {
@@ -25,10 +25,10 @@ public class Member {
 		this.userName = userName;
 	}
 	public String getUserPwd() {
-		return userPwd;
+		return userPassword;
 	}
 	public void setUserPwd(String userPwd) {
-		this.userPwd = userPwd;
+		this.userPassword = userPwd;
 	}
 	public String getEmailId() {
 		return emailId;
