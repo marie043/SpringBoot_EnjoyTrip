@@ -8,4 +8,8 @@
 		from `id_info`
 		where `id`=#{id}
 	</select>
+	<insert id="createIdInfo" parameterType="idInfo">
+		insert into `id_info`(`id`, `salt`)
+		values (#{id}, #{salt})
+	</insert>
 </mapper>

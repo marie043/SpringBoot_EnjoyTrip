@@ -13,4 +13,8 @@
 		from members
 		where `userId`=#{id} and `userPassword`=#{pwd}
 	</select>
+	<insert id="createMember" parameterType="member" >
+		insert into members(`userId`, `userPassword`, `userName`, `emailId`, `emailDomain`)
+		values(#{userId}, #{userPassword}, #{userName}, #{emailId}, #{emailDomain})
+	</insert>
 </mapper>

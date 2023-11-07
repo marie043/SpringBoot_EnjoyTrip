@@ -8,4 +8,8 @@
 	 	from `key_info`
 	 	where `hashed_id` = #{hashed_id}
 	</select>
+	<insert id="createKeyInfo" parameterType="keyInfo">
+		insert info `key_info`(`hashed_id`, `key`, `salt`)
+		values(#{hashed_id}, #{key}, #{salt})
+	</insert>
 </mapper>
