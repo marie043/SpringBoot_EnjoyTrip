@@ -1,11 +1,15 @@
+const ip = 'localhost';
 const session_check_url = 'http://'+ip+'/EnjoyTrip/user/session';
 function sessionCheck(){
 	let userId = getCookie('id');
 	let userPassword = getCookie('pw');
-	fetch(session_cehck_url, {
+	if(userId==null||userPassword==null){
+		document.getElementById('before-login').style.display='block';
+		document.getElementById('after-login').style.display='none';
+		return;
+	}	
+	fetch(session_check_url + `?userId=${userId}&userPassword=${userPassword}`, {
 		method: "GET",
-		headers: {"Content-Type": "application/json"},
-		body: JSON.stringify({userId, userPassword})
 	}).then(function(res){
 		return res.json();
 	}).then(function(obj){

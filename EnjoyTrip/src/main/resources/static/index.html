@@ -1,256 +1,252 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Enjoy Trip</title>
-<link href="./css/style.css" rel="stylesheet" type="text/css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
 	crossorigin="anonymous" />
-<style> 
-  .container {
-    width: 80%; /* �θ� ����� 80% �ʺ� ���� */
-    margin: 0 auto; /* ��� ������ ���� ���� ���� */
-    text-align: center; /* ���� ��� ���� */
-  }
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<link href="./css/style.css" rel="stylesheet" type="text/css">
+<link href="./css/app.css" rel="stylesheet" type="text/css">
+<style>
+.container {
+	width: 80%; /* 부모 요소의 80% 너비를 가짐 */
+	margin: 0 auto; /* 가운데 정렬을 위한 마진 설정 */
+	text-align: center; /* 내용 가운데 정렬 */
+}
 
-  .container img {
-    width: 100%; /* �̹����� �ʺ� �θ� ����� 100%�� �����Ͽ� �θ� ���� */
-    max-width: 100%; /* �̹����� �������� ū ��쿡�� �θ� ��� �ʺ� ���� �ʵ��� ���� */
-    height: auto; /* �̹����� ���� ������ ���� */
-  }
+.container img {
+	width: 100%; /* 이미지의 너비를 부모 요소의 100%로 설정하여 부모에 맞춤 */
+	max-width: 100%; /* 이미지가 원본보다 큰 경우에도 부모 요소 너비를 넘지 않도록 설정 */
+	height: auto; /* 이미지의 원래 비율을 유지 */
+}
 </style>
 </head>
 <body>
-<header class="header__layout">
-	<div class="header">
-		<div class="header__left">
-			<nav id="navbar" class="navbar">
-				<ul>
-					<li><a href="#"><img id="logo"
-							src="./img/logo.png" alt="logo" /></a></li>
-					<li><a class="nav-link scrollto " href="#">������������</a></li>
-					<li><a class="nav-link scrollto "
-						href="#">������������</a></li>
-				</ul>
-				<i class="bi bi-list mobile-nav-toggle"></i>
-			</nav>
-		</div>
+	<header class="header__layout">
+		<div class="header">
+			<div class="header__left">
+				<nav id="navbar" class="navbar">
+					<ul>
+						<li><a href="#"><img id="logo" src="./img/logo.png"
+								alt="logo" /></a></li>
+						<li><a class="nav-link scrollto " href="#">지역별여행지</a></li>
+						<li><a class="nav-link scrollto " href="#">여행정보공유</a></li>
+					</ul>
+					<i class="bi bi-list mobile-nav-toggle"></i>
+				</nav>
+			</div>
 
-		<div class="header__right">
-			<div id="before-login">
-				<a href="#" id="login-a" data-bs-toggle="modal" data-bs-target="#login-modal">�α���</a>
-				<a href="#" id="register-a">ȸ������</a>
-			</div>	
-			<div id="after-login">
-				<div id="profile-dropdown" class="hidden">
-					<img id="profile" src="./img/profile.png"
-						alt="profile" />
+			<div class="header__right">
+				<div id="before-login">
+					<a href="#" id="login-a">로그인</a>
+					<a href="#" id="join-a">회원가입</a>
 				</div>
-				<span id="useridnim"><span id='user-id-nim'></span>��
-					ȯ���մϴ�.</span>
-				<a href="#" id="userInfoLink">ȸ������</a>
-				<input type='button' id="logoutButton" value='�α׾ƿ�'><br>
+				<div id="after-login">
+					<div id="profile-dropdown" class="hidden">
+						<img id="profile" src="./img/profile.png" alt="profile" />
+					</div>
+					<span id="useridnim"><span id='user-id-nim'></span>님 환영합니다.</span>
+					<a href="#" id="userInfoLink">회원정보</a> <input type='button'
+						id="logoutButton" value='로그아웃'><br>
+				</div>
 			</div>
 		</div>
+	</header>
+
+
+	<div class="container" id="contents">
+		<div class="content" id="home-page">
+			<img src="./img/sea.png" alt="sea" />
+		</div>
+		<div class="content" id="register-page"></div>
+		<div class="content" id="update-page"></div>
+		<div class="content" id="board-page"></div>
+		<div class="content" id="map-page"></div>
 	</div>
-</header>
 
-<div id="join-modal" class="modal-overlay">
-	<div class="modal-window" style="height: 460px;">
-		<!-- join modal header -->
-		<header id="join-modal__modal_header_" class="modal-header">
-			<h3 id="join-modal__modal_title_" class="modal-title">ȸ������</h3>
-			<button type="button" aria-label="Close" class="close-area">X</button>
-		</header>
+	<div id="join-modal" class="modal-overlay">
+		<div class="modal-window" style="height: 460px;">
+			<!-- join modal header -->
+			<header id="join-modal__modal_header_" class="modal-header">
+				<h3 id="join-modal__modal_title_" class="modal-title">회원가입</h3>
+				<button type="button" aria-label="Close" class="close-area">X</button>
+			</header>
 
-		<!-- join modal body -->
+			<!-- join modal body -->
 
-		<div id="join-modal___modal_body_" class="modal-body">
-			<form id="form-join" method="POST" action="">
-				<input type="hidden" name="action" value="join" />
+			<div id="join-modal___modal_body_" class="modal-body">
+				<div>
+					<input type="hidden" name="action" value="join" />
+					<div class="container-fluid">
+						<div class="row mb-1 text-center">
+							<div class="col-3">이름</div>
+							<div class="col">
+								<input type="text" placeholder="이름" class="form-control"
+									id="username" name="username">
+							</div>
+						</div>
+						<div class="row mb-1 text-center">
+							<div class="col-3">아이디</div>
+							<div class="col">
+								<input type="text" placeholder="아이디" class="form-control"
+									id="userid" name="userid">
+							</div>
+							<div class="col-3">
+								<button type="button" class="btn btn-secondary btn-sm"
+									id="id-check-btn">중복확인</button>
+							</div>
+						</div>
+						<div class="row mb-1 text-center">
+							<div class="col-3">비밀번호</div>
+							<div class="col">
+								<input type="password" placeholder="비밀번호" class="form-control"
+									id="userpwd" name="userpwd" oninput="validatePassword()">
+							</div>
+							<div class="col-3">
+								<button type="button" class="btn btn-secondary btn-sm"
+									id="str-pwd-btn">강력암호</button>
+							</div>
+						</div>
+						<!-- 비밀번호 조건 추가 -->
+						<div class="row mb-1 text-center">
+							<div class="col-3"></div>
+							<div class="col">
+								<div class="row mb-1">
+									<span style="font-size: 12px; text-align: left;"> 최소
+										10자리 이상 / 영문, 숫자, 특수기호 중 2가지 필수 </span>
+								</div>
+								<div class="row mb-1 text-left">
+									<div class="col-md-5">
+										<p style="font-size: 12px; text-align: left;">
+											비밀번호 안전도 | <span id="safetext" style="font-size: 12px;">
+												- </span>
+										</p>
+									</div>
+
+									<div class="col-md-2 p-1">
+										<!-- 첫 번째 직사각형 -->
+										<div id="box1"
+											style="width: 100%; height: 5px; background-color: #6C757D;"></div>
+									</div>
+									<div class="col-md-2 p-1">
+										<!-- 두 번째 직사각형 -->
+										<div id="box2"
+											style="width: 100%; height: 5px; background-color: #6C757D;"></div>
+									</div>
+									<div class="col-md-2 p-1">
+										<!-- 세 번째 직사각형 -->
+										<div id="box3"
+											style="width: 100%; height: 5px; background-color: #6C757D;"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- 비밀번호 조건 추가 끝 -->
+						<div class="row mb-1 text-center">
+							<div class="col-3">비밀번호확인</div>
+							<div class="col">
+								<input type="password" placeholder="비밀번호확인" class="form-control"
+									id="repassword">
+							</div>
+						</div>
+						<div class="row mb-1 text-center">
+							<div class="col-3">이메일</div>
+							<div class="col-4">
+								<input type="text" placeholder="이메일" class="form-control"
+									id="useremail" name="useremail">
+							</div>
+							<div class="col-1">
+								<span class="input-group-text">@</span>
+							</div>
+							<div class="col">
+								<select class="custom-select" id="selectdomain"
+									name="emaildomain">
+									<option value="">도메인 선택</option>
+									<option value="ssafy.com">SSAFY</option>
+									<option value="google.com">GOOGLE</option>
+									<option value="kakao.com">KAKAO</option>
+									<option value="naver.com">NAVER</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- join modal footer -->
+			<footer id="join-modal__modal_footer_" class="modal-footer">
+				<div>
+					<button type="button" class="btn btn-danger btn-sm"
+						id="register-cancel-button">취소</button>
+					<button type="button" class="btn mr-2 btn-primary btn-sm"
+						id="register-button">회원가입</button>
+				</div>
+			</footer>
+		</div>
+	</div>
+
+	<div id="login-modal" class="modal-overlay">
+		<div class="modal-window" id="login-modal-window">
+			<!-- login modal header -->
+			<header id="login-modal__modal_header_" class="modal-header">
+				<h3 id="login-modal__modal_title_" class="modal-title">로그인</h3>
+				<button type="button" aria-label="Close" class="close-area">X</button>
+			</header>
+
+			<!-- login modal body -->
+			<div id="login-modal___modal_body_" class="modal-body">
 				<div class="container-fluid">
-					<div class="row mb-1 text-center">
-						<div class="col-3">�̸�</div>
-						<div class="col">
-							<input type="text" placeholder="�̸�" class="form-control"
-								id="username" name="username">
+					<div class="row mb-1">
+						<div class="col-12 col-md-3 text-md-right">
+							<!-- 아이디 라벨 -->
+							<label for="login-id">아이디</label>
+						</div>
+						<div class="col-12 col-md-9">
+							<!-- 아이디 입력란 -->
+							<input type="text" placeholder="아이디" class="form-control"
+								id="login-id" name="loginid">
 						</div>
 					</div>
-					<div class="row mb-1 text-center">
-						<div class="col-3">���̵�</div>
-						<div class="col">
-							<input type="text" placeholder="���̵�" class="form-control"
-								id="userid" name="userid">
+					<div class="row mb-1">
+						<div class="col-12 col-md-3 text-md-right">
+							<!-- 비밀번호 라벨 -->
+							<label for="login-password">비밀번호</label>
 						</div>
-						<div class="col-3">
-							<button type="button" class="btn btn-secondary btn-sm"
-								id="id-check-btn">�ߺ�Ȯ��</button>
-						</div>
-					</div>
-					<div class="row mb-1 text-center">
-						<div class="col-3">��й�ȣ</div>
-						<div class="col">
-							<input type="password" placeholder="��й�ȣ" class="form-control"
-								id="userpwd" name="userpwd" oninput="validatePassword()">
-						</div>
-						<div class="col-3">
-							<button type="button" class="btn btn-secondary btn-sm"
-								id="str-pwd-btn">���¾�ȣ</button>
+						<div class="col-12 col-md-9">
+							<!-- 비밀번호 입력란 -->
+							<input type="password" placeholder="비밀번호" class="form-control"
+								id="login-password" name="loginpwd">
 						</div>
 					</div>
-					<!-- ��й�ȣ ���� �߰� -->
-					<div class="row mb-1 text-center">
-						<div class="col-3"></div>
-						<div class="col">
-							<div class="row mb-1">
-								<span style="font-size: 12px; text-align: left;"> �ּ� 10�ڸ�
-									�̻� / ����, ����, Ư����ȣ �� 2���� �ʼ� </span>
-							</div>
-							<div class="row mb-1 text-left">
-								<div class="col-md-5">
-									<p style="font-size: 12px; text-align: left;">
-										��й�ȣ ������ | <span id="safetext" style="font-size: 12px;">
-											- </span>
-									</p>
-								</div>
-
-								<div class="col-md-2 p-1">
-									<!-- ù ��° ���簢�� -->
-									<div id="box1"
-										style="width: 100%; height: 5px; background-color: #6C757D;"></div>
-								</div>
-								<div class="col-md-2 p-1">
-									<!-- �� ��° ���簢�� -->
-									<div id="box2"
-										style="width: 100%; height: 5px; background-color: #6C757D;"></div>
-								</div>
-								<div class="col-md-2 p-1">
-									<!-- �� ��° ���簢�� -->
-									<div id="box3"
-										style="width: 100%; height: 5px; background-color: #6C757D;"></div>
-								</div>
+					<div class="row">
+						<div class="col-12 col-md-9 offset-md-3">
+							<!-- 아이디 저장 체크박스 -->
+							<div class="form-check text-md-left">
+								<label class="form-check-label" for="saveid">아이디 저장</label> <input
+									type="checkbox" class="form-check-input" id="saveid"
+									name="saveid" value="ok">
 							</div>
 						</div>
 					</div>
-					<!-- ��й�ȣ ���� �߰� �� -->
-					<div class="row mb-1 text-center">
-						<div class="col-3">��й�ȣȮ��</div>
-						<div class="col">
-							<input type="password" placeholder="��й�ȣȮ��" class="form-control"
-								id="repassword">
-						</div>
-					</div>
-					<div class="row mb-1 text-center">
-						<div class="col-3">�̸���</div>
-						<div class="col-4">
-							<input type="text" placeholder="�̸���" class="form-control"
-								id="useremail" name="useremail">
-						</div>
-						<div class="col-1">
-							<span class="input-group-text">@</span>
-						</div>
-						<div class="col">
-							<select class="custom-select" id="selectdomain"
-								name="emaildomain">
-								<option value="">������ ����</option>
-								<option value="ssafy.com">SSAFY</option>
-								<option value="google.com">GOOGLE</option>
-								<option value="kakao.com">KAKAO</option>
-								<option value="naver.com">NAVER</option>
-							</select>
-						</div>
-					</div>
 				</div>
-			</form>
+			</div>
+
+			<!-- login modal footer -->
+			<footer id="login-modal__modal_footer_" class="modal-footer">
+				<div>
+					<button type="button" class="btn btn-danger btn-sm"
+						id="cancel-button">취소</button>
+					<button type="button" class="btn mr-2 btn-primary btn-sm"
+						id="login-button">로그인</button>
+				</div>
+			</footer>
 		</div>
-
-		<!-- join modal footer -->
-		<footer id="join-modal__modal_footer_" class="modal-footer">
-			<div>
-				<button type="button" class="btn btn-danger btn-sm"
-					id="register-cancel-button">���</button>
-				<button type="button" class="btn mr-2 btn-primary btn-sm"
-					id="register-button">ȸ������</button>
-			</div>
-		</footer>
 	</div>
-</div>
-
-<div id="login-modal" class="modal-overlay">
-	<div class="modal-window">
-		<!-- login modal header -->
-		<header id="login-modal__modal_header_" class="modal-header">
-			<h3 id="login-modal__modal_title_" class="modal-title">�α���</h3>
-			<button type="button" aria-label="Close" class="close-area">X</button>
-		</header>
-
-		<!-- login modal body -->
-		<div id="login-modal___modal_body_" class="modal-body">
-			<div class="container-fluid">
-				<div class="row mb-1">
-					<div class="col-12 col-md-3 text-md-right">
-						<!-- ���̵� �� -->
-						<label for="login-id">���̵�</label>
-					</div>
-					<div class="col-12 col-md-9">
-						<!-- ���̵� �Է¶� -->
-						<input type="text" placeholder="���̵�" class="form-control"
-							id="login-id" name="loginid">
-					</div>
-				</div>
-				<div class="row mb-1">
-					<div class="col-12 col-md-3 text-md-right">
-						<!-- ��й�ȣ �� -->
-						<label for="login-password">��й�ȣ</label>
-					</div>
-					<div class="col-12 col-md-9">
-						<!-- ��й�ȣ �Է¶� -->
-						<input type="password" placeholder="��й�ȣ" class="form-control"
-							id="login-password" name="loginpwd">
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-12 col-md-9 offset-md-3">
-						<!-- ���̵� ���� üũ�ڽ� -->
-						<div class="form-check text-md-left">
-							<label class="form-check-label" for="saveid">���̵� ����</label> <input
-								type="checkbox" class="form-check-input" id="saveid"
-								name="saveid" value="ok">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- login modal footer -->
-		<footer id="login-modal__modal_footer_" class="modal-footer">
-			<div>
-				<button type="button" class="btn btn-danger btn-sm"
-					id="cancel-button">���</button>
-				<button type="button" class="btn mr-2 btn-primary btn-sm"
-					id="login-button">�α���</button>
-			</div>
-		</footer>
-	</div>
-</div>
-<div class="container" id="contents">
-<div class="content" id="home-page"><img src="./img/sea.png" alt="sea"/></div>
-<div class="content" id="register-page">
-
-</div>
-<div class="content" id="update-page">
-
-</div>
-<div class="content" id="board-page">
-
-</div>
-<div class="content" id="map-page">
-
-</div>
-</div>
 </body>
 <script type="text/javascript" src="./js/cookie.js"></script>
 <script type="text/javascript" src="./js/index.js"></script>

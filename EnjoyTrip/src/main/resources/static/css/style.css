@@ -10,9 +10,9 @@
 }
 
 a {
-    /* color: inherit !important; 留곹겕 �뀓�뒪�듃 �깋�쓣 �긽�쐞 �슂�냼�쓽 �깋�쑝濡� �긽�냽�븯怨� !important濡� �슦�꽑�떆�빀�땲�떎. */
+    /* color: inherit !important; 링크 텍스트 색을 상위 요소의 색으로 상속하고 !important로 우선시합니다. */
     text-decoration: none !important;
-    /* 諛묒쨪�쓣 �젣嫄고븯怨� !important濡� �슦�꽑�떆�빀�땲�떎. */
+    /* 밑줄을 제거하고 !important로 우선시합니다. */
     font-size: 20px;
     font-weight: 800;
     color: gray !important;
@@ -74,7 +74,7 @@ font-size: 20px;
     height: 15%;
 }
 
-/* �뱶濡��떎�슫 硫붾돱 �닲源� */
+/* 드롭다운 메뉴 숨김 */
 .profile-menu {
     display: none;
     position: absolute;
@@ -85,12 +85,12 @@ font-size: 20px;
     z-index: 1;
 }
 
-/* �봽濡쒗븘 �궗吏꾩뿉 �샇踰� �떆 �뱶濡��떎�슫 硫붾돱 �몴�떆 */
+/* 프로필 사진에 호버 시 드롭다운 메뉴 표시 */
 .profile-dropdown:hover .profile-menu {
     display: block;
 }
 
-/* �뱶濡��떎�슫 硫붾돱 �븘�씠�뀥 �뒪���씪留� */
+/* 드롭다운 메뉴 아이템 스타일링 */
 .profile-menu ul {
     list-style: none;
     padding: 0;
@@ -112,7 +112,7 @@ font-size: 20px;
 }
 
 
-/* �쉶�썝媛��엯 紐⑤떖 */
+/* 회원가입 모달 */
 #join-modal {
     display: none;
     justify-content: center;
@@ -123,7 +123,7 @@ font-size: 20px;
     width: 100%;
     height: 100%;
     z-index: 1000;
-    /* 紐⑤떖�쓣 �떎瑜� �궡�슜 �쐞�뿉 �몴�떆�븯湲� �쐞�븳 媛� */
+    /* 모달을 다른 내용 위에 표시하기 위한 값 */
     font-weight: 600;
 }
 
@@ -138,7 +138,7 @@ font-size: 20px;
     position: relative;
     padding: 10px;
     margin: auto 0;
-    /* 紐⑤떖�쓣 �닔�룊 諛� �닔吏곸쑝濡� 媛��슫�뜲 �젙�젹�빀�땲�떎. */
+    /* 모달을 수평 및 수직으로 가운데 정렬합니다. */
 }
 
 #join-modal .modal-body {
@@ -147,28 +147,28 @@ font-size: 20px;
 
 #join-modal .custom-select {
     width: 100%;
-    /* �썝�븯�뒗 �꼫鍮꾨줈 �꽕�젙 */
+    /* 원하는 너비로 설정 */
     height: 40px;
-    /* �썝�븯�뒗 �넂�씠濡� �꽕�젙 */
+    /* 원하는 높이로 설정 */
 }
 
 #join-modal__modal_footer_ {
     margin-top: 50px;
-    /* �썝�븯�뒗 �뿬諛� �겕湲곕�� �꽕�젙�빀�땲�떎. */
+    /* 원하는 여백 크기를 설정합니다. */
 }
 
 #join-modal__modal_footer_ .btn-danger {
     margin-left: 10px;
     float: right;
-    /* 痍⑥냼 踰꾪듉�쓣 �삤瑜몄そ�쑝濡� 諛�湲� */
+    /* 취소 버튼을 오른쪽으로 밀기 */
 }
 
 #join-modal__modal_footer_ .btn-primary {
     float: right;
-    /* �쉶�썝媛��엯 踰꾪듉�쓣 �삤瑜몄そ�쑝濡� 諛�湲� */
+    /* 회원가입 버튼을 오른쪽으로 밀기 */
 }
 
-/* 濡쒓렇�씤 紐⑤떖 */
+/* 로그인 모달 */
 #login-modal {
     display: none;
     justify-content: center;
@@ -179,7 +179,7 @@ font-size: 20px;
     width: 100%;
     height: 100%;
     z-index: 1000;
-    /* 紐⑤떖�쓣 �떎瑜� �궡�슜 �쐞�뿉 �몴�떆�븯湲� �쐞�븳 媛� */
+    /* 모달을 다른 내용 위에 표시하기 위한 값 */
     font-weight: 600;
 }
 
@@ -194,7 +194,7 @@ font-size: 20px;
     position: relative;
     padding: 10px;
     margin: auto 0;
-    /* 紐⑤떖�쓣 �닔�룊 諛� �닔吏곸쑝濡� 媛��슫�뜲 �젙�젹�빀�땲�떎. */
+    /* 모달을 수평 및 수직으로 가운데 정렬합니다. */
 }
 
 #login-modal .modal-body {
@@ -205,12 +205,12 @@ font-size: 20px;
 #login-modal__modal_footer_ .btn-danger {
     margin-left: 10px;
     float: right;
-    /* 痍⑥냼 踰꾪듉�쓣 �삤瑜몄そ�쑝濡� 諛�湲� */
+    /* 취소 버튼을 오른쪽으로 밀기 */
 }
 
 #login-modal__modal_footer_ .btn-primary {
     float: right;
-    /* �쉶�썝媛��엯 踰꾪듉�쓣 �삤瑜몄そ�쑝濡� 諛�湲� */
+    /* 회원가입 버튼을 오른쪽으로 밀기 */
 }
 
 .edit-information {
@@ -228,7 +228,7 @@ font-size: 20px;
     margin-top: 30px;
     gap: 5px;
 
-    float: right; /* �쉶�썝媛��엯 踰꾪듉�쓣 �삤瑜몄そ�쑝濡� 諛�湲� */
+    float: right; /* 회원가입 버튼을 오른쪽으로 밀기 */
 }
 
 #infoBOX{
