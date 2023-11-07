@@ -20,6 +20,12 @@ document.querySelectorAll('.close-area').forEach(element=>{
 });
 document.getElementById('login-a').addEventListener('click', function(){
 	document.getElementById('login-modal').style.display='flex';
+	let id = getCookie('id');
+	let pw = getCookie('pw');
+	if(id!=null&&pw!=null){
+		document.getElementById('login-id').value = id;
+		document.getElementById('login-password').value = pw;
+	}
 });
 document.getElementById('join-a').addEventListener('click', function(){
 	document.getElementById('join-modal').style.display='flex';
@@ -33,7 +39,7 @@ function sessionCheck(){
 		document.getElementById('after-login').style.display='none';
 		return;
 	}	
-	fetch(session_check_url + `?userId=${userId}&userPassword=${userPassword}`, {
+	fetch(session_check_url+`?userId=${userId}&userPassword=${userPassword}`, {
 		method: "GET",
 	}).then(function(res){
 		return res.json();
