@@ -61,10 +61,10 @@ public class MemberServiceImpl implements MemberService {
 			String hashed_cUserPwd = OpenCrypt.byteArrayToHex(OpenCrypt.getSHA256(cUserPwd, keyInfo.getSalt()));
 			member = memberMapper.readMember(member.getUserId(), hashed_cUserPwd);
 			if (member == null) {
-				logintryMapper.updateLointryFail(loginTry.getClient_ip());
+				logintryMapper.updateLointryFail(loginTry.getClient_ip(), loginTry.getUser_id());
 				throw new Exception("wrong password");
 			}
-			logintryMapper.updateLogintrySuccess();
+			logintryMapper.updateLogintrySuccess(loginTry.getClient_ip(), loginTry.getUser_id());
 			return member;
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();

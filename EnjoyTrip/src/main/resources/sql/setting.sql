@@ -7,17 +7,16 @@ CREATE table members (
   `emailId` VARCHAR(20) NULL DEFAULT NULL,
   `emailDomain` VARCHAR(45) NULL DEFAULT NULL,
   `joinDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`user_id`));
+  PRIMARY KEY (`userId`));
 
   create table login_try(
   `idx` int auto_increment not null,
   `user_id` varchar(16),
   `retry` int default 0,
-  `last_try_date` date,
-  `last_try_time` time,
+  `last_try_date` timestamp default current_timestamp,
+  `last_try_time` timestamp default current_timestamp,
   `client_ip` varchar(15) not null,
-  primary key(`idx`,`client_ip`),
-  foreign key(`user_id`) references enjoytrip.members(`user_id`)
+  primary key(`idx`)
   );
   create table board(
 	`article_no` int auto_increment not null,

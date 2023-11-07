@@ -8,6 +8,7 @@ import com.ssafy.enjoy.member.model.LoginTry;
 
 @Mapper
 public interface LogintryMapper {
+	
 	LoginTry readLoginTry(String ip, String id) throws SQLException;
 
 	void updateLointryFail(String ip, String id) throws SQLException;
@@ -15,8 +16,4 @@ public interface LogintryMapper {
 	void updateLogintrySuccess(String ip, String id) throws SQLException;
 
 	void createLogintry(String ip, String id) throws SQLException;
-
-	void updateLointryFail(String ip) throws SQLException;
-
-	void updateLogintrySuccess() throws SQLException;
 }
