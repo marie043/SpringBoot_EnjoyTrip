@@ -6,12 +6,12 @@
 	<select id="idCheck" parameterType="String" resultType="Integer">
 		select count(*)
 		from members
-		where `user_id`=#{id}
+		where `userId`=#{id}
 	</select>
 	<select id="readMember" parameterType="String" resultType="member">
 		select `userId`, `userPassword`, `userName`, `emailId`, `emailDomain`
 		from members
-		where `userId`=#{id} and `userPassword`=#{pwd}
+		where `userId`=#{id} and `userPassword`=#{pw}
 	</select>
 	<insert id="createMember" parameterType="member" >
 		insert into members(`userId`, `userPassword`, `userName`, `emailId`, `emailDomain`)

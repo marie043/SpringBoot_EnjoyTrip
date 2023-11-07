@@ -13,8 +13,9 @@ document.getElementById('login-button').addEventListener('click', function(){
 		return;
 	}
 	if(saveid==true){
-		setCookie('id', userId);
-		setCookie('pw', userPassword);
+		setCookie('saveid', "ok");
+	}else{
+		deleteCookie('saveid');
 	}
 	fetch(login_url, {
 		method: 'POST',
@@ -36,6 +37,8 @@ document.getElementById('login-button').addEventListener('click', function(){
 			document.getElementById('login-info-name').value = name;
 			document.getElementById('login-info-email-id').value = email_id;
 			document.getElementById('login-info-email-domain').value = email_domain;
+			setCookie('id', userId);
+			setCookie('pw', userPassword);
 		}
 		alert(detail);
 	});

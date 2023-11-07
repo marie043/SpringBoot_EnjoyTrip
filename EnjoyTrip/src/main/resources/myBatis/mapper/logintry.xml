@@ -10,13 +10,13 @@
 	</select>
 	<update id="updateLointryFail" parameterType="String">
 		update `login_try`
-		set retry=retry+1, `last_try_date`=current_timestamp, `last_try_time`=current_timestamp 
-		where `client_ip`=#{ip} and `user_id`=#{id}, 
+		set `retry`=`retry`+1, `last_try_date`=current_timestamp, `last_try_time`=current_timestamp 
+		where `client_ip`=#{ip} and `user_id`=#{id}
 	</update>
-	<update id="updateLogintrySuccess" parameterType="Strng">
+	<update id="updateLogintrySuccess" parameterType="String">
 		update `login_try`
-		set retry=0, `last_try_date`=null, `last_try_time`=null 
-		where `client_ip`=#{ip} and `user_id`=#{id}, 
+		set `retry`=0, `last_try_date`=null, `last_try_time`=null 
+		where `client_ip`=#{ip} and `user_id`=#{id}
 	</update>
 	<insert id="createLogintry" parameterType="String">
 		insert into `login_try`(`client_ip`, `user_id`)

@@ -11,6 +11,10 @@ document.getElementById('logout-button').addEventListener('click', function(){
 		if(msg=='OK'){
 			document.getElementById('before-login').style.display='block';
 			document.getElementById('after-login').style.display='none';
+			if(getCookie('saveid')!='ok'){
+				deleteCookie('id');
+				deleteCookie('pw');
+			}
 		}
 		alert(detail);
 	})

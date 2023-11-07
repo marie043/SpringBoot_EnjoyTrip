@@ -3,8 +3,8 @@ const id_check_url = 'http://'+ip+'/EnjoyTrip/user/idCheck';
 
 document.getElementById('join-button').addEventListener('click', function(){
 	const userId = document.getElementById('userid').value;
-	const usreName = docuement.getElementById('username').value;
-	const usrePassword = docuemnt.getElementById('password').value;
+	const userName = document.getElementById('username').value;
+	const userPassword = document.getElementById('userpwd').value;
 	const passwordCheck = document.getElementById('repassword').value;
 	const emailId = document.getElementById('useremail').value;
 	const selectDomain = document.getElementById('selectdomain');
@@ -22,7 +22,7 @@ document.getElementById('join-button').addEventListener('click', function(){
 		alert('비밀번호를 작성해 주세요');
 		return;
 	}
-	if(emailId==''||emailId==null||emailDomain==''||eamilDomain==null){
+	if(emailId==''||emailId==null||emailDomain==''||emailDomain==null){
 		alert('이메일을 작성해 주세요');
 		return;
 	}
@@ -66,11 +66,11 @@ document.getElementById('id-check-button').addEventListener('click', function(){
 		const detail = obj['detail'];
 		if(msg!='OK'){
 			document.getElementById('userid').value = '';
-			document.getElementById('userid').style.color='blue';
-			doucment.getElementById('is-id-checked').value = 'OK';
-		}else{
 			document.getElementById('userid').style.color='red';
-			doucment.getElementById('is-id-checked').value = 'NO';
+			document.getElementById('is-id-checked').value = 'NO';
+		}else{
+			document.getElementById('userid').style.color='blue';
+			document.getElementById('is-id-checked').value = 'OK';
 		}
 		alert(detail);
 	});

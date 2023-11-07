@@ -1,7 +1,6 @@
 const ip = 'localhost';
 const session_check_url = 'http://'+ip+'/EnjoyTrip/user/session';
 
-sessionCheck();
 changePage('home-page');
 document.getElementById('home-link').addEventListener('click', function(){
 	changePage('home-page');
@@ -20,29 +19,28 @@ document.querySelectorAll('.close-area').forEach(element=>{
 });
 document.getElementById('login-a').addEventListener('click', function(){
 	document.getElementById('login-modal').style.display='flex';
+	if(getCookie('saveid')!=null){
 	const id = getCookie('id');
 	const pw = getCookie('pw');
-	if(id!=null&&pw!=null){
+	if(id!=null&&pw!=null||id!=''||pw!=''){
 		document.getElementById('login-id').value = id;
 		document.getElementById('login-password').value = pw;
+	}
 	}
 });
 document.getElementById('join-a').addEventListener('click', function(){
 	document.getElementById('join-modal').style.display='flex';
 });
-
-function sessionCheck(){
-	let userId = getCookie('id');
-	let userPassword = getCookie('pw');
-	if(userId==null||userPassword==null){
-		document.getElementById('before-login').style.display='block';
-		document.getElementById('after-login').style.display='none';
-		return;
-	}	
+let userId_session = getCookie('id');
+let userPassword_session = getCookie('pw');
+if(userId_session==null||userPassword_session==null||userId_session==''||userPassword_session==''){
+	document.getElementById('before-login').style.display='block';
+	document.getElementById('after-login').style.display='none';
+}else{
 	fetch(session_check_url, {
 		method: "POST",
 		headers: { 'Content-Type': 'application/json', },
-		body: JSON.stringify({userId, userPassword}),
+		body: JSON.stringify({userId: userId_session, userPassword: userPassword_session}),
 	}).then(function(res){
 		return res.json();
 	}).then(function(obj){
@@ -58,13 +56,10 @@ function sessionCheck(){
 			document.getElementById('login-info-name').value = name;
 			document.getElementById('login-info-email-id').value = email_id;
 			document.getElementById('login-info-email-domain').value = email_domain;
-			alert(detail);
-			return;
 		}else{
 			document.getElementById('before-login').style.display='block';
 			document.getElementById('after-login').style.display='none';
 			alert(detail);
-			return;
 		}
 	});
 }

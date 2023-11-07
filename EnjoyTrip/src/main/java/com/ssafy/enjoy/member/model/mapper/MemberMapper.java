@@ -11,7 +11,7 @@ public interface MemberMapper {
 
 	int idCheck(String id) throws Exception ;
 
-	Member readMember(String id, String pwd) throws SQLException;
+	Member readMember(String id, String pw) throws SQLException;
 
 	void createMember(Member member) throws SQLException;
 

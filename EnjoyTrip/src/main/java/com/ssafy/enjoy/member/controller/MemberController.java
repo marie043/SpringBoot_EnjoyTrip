@@ -24,25 +24,33 @@ public class MemberController {
 	MemberService memberService;
 
 	@PostMapping("/session")
-	public Map<String, String> sessionCheck(@RequestBody Member member, HttpSession session) {
+	public Map<String, String> sessionCheck(@RequestBody Member member, HttpSession session, HttpServletRequest request) {
 		Map<String, String> result = new HashMap<String, String>();
+		System.out.println(member);
 		if (member == null||member.getUserId()==null||member.getUserPassword()==null) {
 			result.put("msg", "NO");
 			result.put("detail", "no input id");
 		} else {
 			Member userinfo = (Member) session.getAttribute("userinfo");
+			try {
+				member = memberService.loginMember(member, request.getRemoteAddr());
+			}catch(Exception e) {
+				result.put("msg", "NO");
+				result.put("detail", "you're not our member");
+			}
 			if(userinfo==null) {
+				System.out.println(userinfo);
 				result.put("msg", "NO");
 				result.put("detail", "already logout or session expired");
-			}else if (member.getUserId().equals(userinfo.getUserId())&&member.getUserPassword().equals(userinfo.getUserPassword())) {
+			}else if(userinfo.getUserId().equals(member.getUserId())&&userinfo.getUserPassword().equals(member.getUserPassword())){
 				result.put("msg", "OK");
 				result.put("detail", "login success");
 				result.put("name", userinfo.getUserName());
 				result.put("email_id", userinfo.getEmailId());
 				result.put("email_domain", userinfo.getEmailDomain());
-			} else {
+			}else{
 				result.put("msg", "NO");
-				result.put("detail", "no matching id or password");
+				result.put("detail", "already logout or session expired");
 			}
 		}
 		return result;
