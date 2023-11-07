@@ -1,5 +1,18 @@
 const ip = 'localhost';
 const session_check_url = 'http://'+ip+'/EnjoyTrip/user/session';
+
+sessionCheck();
+changePage('home-page');
+document.getElementById('home-link').addEeventListener('click', function(){
+	changePage('home-page');
+});
+document.getElementById('map-link').addEeventListener('click', function(){
+	changePage('map-page')
+});
+document.getElementById('board-link').addEeventListener('click', function(){
+	changePage('board-page');
+});
+
 function sessionCheck(){
 	let userId = getCookie('id');
 	let userPassword = getCookie('pw');
@@ -36,5 +49,3 @@ function changePage(pageId){
 	document.querySelectorAll('content').forEach(element=>{element.style.display='none'});
 	document.getElementById(pageId).style.display='block';
 }
-sessionCheck();
-changePage('home-page');
