@@ -55,6 +55,12 @@ document.getElementById('map-link').addEventListener('click', function(){
 			changePage('home-page');
 		}
 	});
+	let position = new kakao.maps.LatLng(37.511536, 127.057668);
+	let map = new kakao.maps.Map(document.getElementById('map'), {
+		center: position,
+		level: 3,
+		mapTypeId: kakao.maps.MapTypeId.ROADMAP
+	});
 });
 document.getElementById('board-link').addEventListener('click', function(){
 	changePage('board-page');

@@ -1,6 +1,6 @@
 package com.ssafy.enjoy.map.model;
 
-public class Map {
+public class MyMap {
 	private int sido_code;
 	private String sido_name;
 	private int gugun_code;

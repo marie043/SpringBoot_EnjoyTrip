@@ -8,7 +8,7 @@ const arr = ["123","password","qwerty","111111",
 	"27653","1qaz2wsx","superman","asdfghjkl"];
 
 document.getElementById('userpwd').addEventListener('keydown', function(){
-	const password = this.value;
+	const password = document.getElementById('userpwd').value;
 	// 1. 최소 10자리 이상이어야 하고, 영문, 숫자, 특수 기호 중 2가지 이상이 포함되어야 합니다.
 	const condition1 = /^(?=.*[a-zA-Z])(?=.*\d|\W).{10,}$/.test(password);
 	// 2. 배열 arr에 있는 단어가 비밀번호에 포함되면 안됩니다.
@@ -19,35 +19,35 @@ document.getElementById('userpwd').addEventListener('keydown', function(){
 	const box1 = document.getElementById("box1");
 	const box2 = document.getElementById("box2");
 	const box3 = document.getElementById("box3");
-	
+	console.log(condition1, condition2, condition3);
 	const safetext = document.getElementById("safetext");
 	
-	if (condition1 && condition2 && condition3) {
+	if (condition1==true && condition2==true && condition3==true) {
 		box1.style.backgroundColor = "green";
 		box2.style.backgroundColor = "green";
 		box3.style.backgroundColor = "green";
-		safetext.textContent = "강";
+		safetext.innerText = "강";
 		safetext.style.color = "green"
 		isValidPassword = true
-	} else if (condition1 && condition2) {
+	} else if (condition1==true && condition2==true) {
 		box1.style.backgroundColor = "yellow";
 		box2.style.backgroundColor = "yellow";
 		box3.style.backgroundColor = "#6C757D";
-		safetext.textContent = "중";
+		safetext.innerText = "중";
 		safetext.style.color = "yellow"
 		isValidPassword = true
-	} else if (condition1) {
+	} else if (condition1==true) {
 		box1.style.backgroundColor = "red";
 		box2.style.backgroundColor = "#6C757D";
 		box3.style.backgroundColor = "#6C757D";
-		safetext.textContent = "약";
+		safetext.innerText = "약";
 		safetext.style.color = "red"
 		isValidPassword = true
 	} else {
 		box1.style.backgroundColor = "#6C757D";
 		box2.style.backgroundColor = "#6C757D";
 		box3.style.backgroundColor = "#6C757D";
-		safetext.textContent = "-";
+		safetext.innerText = "-";
 		safetext.style.color = "#6C757D"
 		isValidPassword = false
 	}

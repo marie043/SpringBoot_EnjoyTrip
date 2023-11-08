@@ -2,11 +2,11 @@ package com.ssafy.enjoy.map.model.service;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.enjoy.map.model.MyMap;
 import com.ssafy.enjoy.map.model.mapper.MapMapper;
 
 @Service
@@ -16,7 +16,7 @@ public class MapServiceImpl implements MapService {
 	MapMapper mapMapper;
 
 	@Override
-	public List<Map> getSido() throws Exception {
+	public List<MyMap> getSido() throws Exception {
 		try {
 			return mapMapper.readSido();
 		}catch(SQLException e) {
@@ -26,7 +26,7 @@ public class MapServiceImpl implements MapService {
 	}
 
 	@Override
-	public List<Map> getGugun() throws Exception {
+	public List<MyMap> getGugun() throws Exception {
 		try {
 			return mapMapper.readGugun();
 		}catch(SQLException e) {
@@ -36,7 +36,7 @@ public class MapServiceImpl implements MapService {
 	}
 
 	@Override
-	public List search(Map map) throws Exception {
+	public List<MyMap> search(MyMap map) throws Exception {
 		try {
 			return mapMapper.readMap(map);
 		}catch(SQLException e) {

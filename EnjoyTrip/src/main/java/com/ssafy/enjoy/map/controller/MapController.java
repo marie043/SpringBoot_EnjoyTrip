@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.enjoy.map.model.MyMap;
 import com.ssafy.enjoy.map.model.service.MapService;
 
 @RestController
@@ -23,7 +24,7 @@ public class MapController {
 	public Map<String, Object> getSido(){
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
-			List<Map> list = mapService.getSido();
+			List<MyMap> list = mapService.getSido();
 			result.put("msg", "OK");
 			result.put("detail","loaded city info");
 			result.put("list", list);
@@ -39,7 +40,7 @@ public class MapController {
 	public Map<String, Object> getGugun(){
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
-			List<Map> list = mapService.getGugun();
+			List<MyMap> list = mapService.getGugun();
 			result.put("msg", "OK");
 			result.put("detail", "loaded section info");
 			result.put("list", list);
@@ -52,7 +53,7 @@ public class MapController {
 	}
 	
 	@GetMapping("/search")
-	public Map<String, Object> search(@RequestBody Map map){
+	public Map<String, Object> search(@RequestBody MyMap map){
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
 			List list = mapService.search(map);

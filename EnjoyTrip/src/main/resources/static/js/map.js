@@ -1,5 +1,4 @@
-var markers = [];
-var ps = new kakao.maps.services.Places();
+const search_map_url = 'http://'+ip+'/EnjoyTrip/map/search';
 function changeGugun(){
 	const select = document.getElementById('search-area');
 	const sido = select[select.selectedIndex].value;
