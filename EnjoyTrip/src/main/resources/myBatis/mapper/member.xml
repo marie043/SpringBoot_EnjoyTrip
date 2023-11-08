@@ -17,4 +17,9 @@
 		insert into members(`userId`, `userPassword`, `userName`, `emailId`, `emailDomain`)
 		values(#{userId}, #{userPassword}, #{userName}, #{emailId}, #{emailDomain})
 	</insert>
+	<update id="updateMember" parameterType="modifyMember">
+		update members
+		set `userPassword`=#{newPassword}, `userName`=#{userName}, `emailId`=#{emailId}, `emailDomain`=#{emailDomain}
+		where `userId`=#{userId} and `userPassword`=#{userPassword}
+	</update>
 </mapper>

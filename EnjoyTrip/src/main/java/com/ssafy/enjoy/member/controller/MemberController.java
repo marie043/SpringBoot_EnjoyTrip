@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.enjoy.member.model.Member;
+import com.ssafy.enjoy.member.model.ModifyMember;
 import com.ssafy.enjoy.member.model.service.MemberService;
 
 @RestController
@@ -26,18 +27,11 @@ public class MemberController {
 	@PostMapping("/session")
 	public Map<String, String> sessionCheck(@RequestBody Member member, HttpSession session, HttpServletRequest request) {
 		Map<String, String> result = new HashMap<String, String>();
-		System.out.println(member);
 		if (member == null||member.getUserId()==null||member.getUserPassword()==null) {
 			result.put("msg", "NO");
 			result.put("detail", "no input id");
 		} else {
 			Member userinfo = (Member) session.getAttribute("userinfo");
-			try {
-				member = memberService.loginMember(member, request.getRemoteAddr());
-			}catch(Exception e) {
-				result.put("msg", "NO");
-				result.put("detail", "you're not our member");
-			}
 			if(userinfo==null) {
 				System.out.println(userinfo);
 				result.put("msg", "NO");
@@ -65,13 +59,14 @@ public class MemberController {
 			result.put("detail", "no id or no pw");
 		}else {
 			try {
-				member = memberService.loginMember(member, ip);
-				session.setAttribute("userinfo", member);
+				Member userinfo = memberService.loginMember(member, ip);
+				userinfo.setUserPassword(member.getUserPassword());
+				session.setAttribute("userinfo", userinfo);
 				result.put("msg", "OK");
 				result.put("detail", "login success");
-				result.put("name", member.getUserName());
-				result.put("email_id", member.getEmailId());
-				result.put("email_domain", member.getEmailDomain());
+				result.put("name", userinfo.getUserName());
+				result.put("email_id", userinfo.getEmailId());
+				result.put("email_domain", userinfo.getEmailDomain());
 			}catch(Exception e) {
 				e.printStackTrace();
 				result.put("msg", "No");
@@ -129,6 +124,35 @@ public class MemberController {
 		session.invalidate();
 		result.put("msg", "OK");
 		result.put("detail", "로그아웃 되었습니다.");
+		return result;
+	}
+	
+	@PostMapping("update")
+	public Map<String, String> update(@RequestBody ModifyMember member,HttpServletRequest request, HttpSession session){
+		Map<String, String> result = new HashMap<String, String>();
+		if(member.getUserId()==null||member.getUserPassword()==null||member.getUserName()==null||member.getEmailId()==null||member.getEmailDomain()==null||member.getNewPassword()==null) {
+			result.put("msg", "NO");
+			result.put("detail", "모든 정보를 입력해 주세요");
+		}else {
+			if(member.getNewPassword().equals("")) {
+				member.setNewPassword(member.getUserPassword());
+			}
+			try {
+				Member userinfo = memberService.loginMember(member, request.getRemoteAddr());
+				member.setUserPassword(userinfo.getUserPassword());
+				try {
+					memberService.updateMember(member);
+					result.put("msg", "OK");
+					result.put("detail", "정보 수정이 완료 되었습니다");
+				}catch(Exception e) {
+					result.put("msg", "NO");
+					result.put("detail", e.getMessage());
+				}
+			}catch(Exception e){
+				result.put("msg", "NO");
+				result.put("detail", "비밀번호가 틀립니다.");
+			}
+		}
 		return result;
 	}
 }

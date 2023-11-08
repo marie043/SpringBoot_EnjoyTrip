@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ssafy.enjoy.member.model.Member;
+import com.ssafy.enjoy.member.model.ModifyMember;
 
 @Mapper
 public interface MemberMapper {
@@ -14,5 +15,7 @@ public interface MemberMapper {
 	Member readMember(String id, String pw) throws SQLException;
 
 	void createMember(Member member) throws SQLException;
+
+	void updateMember(ModifyMember member) throws SQLException;
 
 }

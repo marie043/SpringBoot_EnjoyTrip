@@ -13,6 +13,7 @@ import com.ssafy.enjoy.member.model.IdInfo;
 import com.ssafy.enjoy.member.model.KeyInfo;
 import com.ssafy.enjoy.member.model.LoginTry;
 import com.ssafy.enjoy.member.model.Member;
+import com.ssafy.enjoy.member.model.ModifyMember;
 import com.ssafy.enjoy.member.model.mapper.IdInfoMapper;
 import com.ssafy.enjoy.member.model.mapper.KeyInfoMapper;
 import com.ssafy.enjoy.member.model.mapper.LogintryMapper;
@@ -53,19 +54,18 @@ public class MemberServiceImpl implements MemberService {
 				throw new Exception("no such user");
 			}
 			IdInfo idInfo = idInfoMapper.readIdInfo(member.getUserId());
-			System.out.println(idInfo);
 			String hashed_id = OpenCrypt.byteArrayToHex(OpenCrypt.getSHA256(member.getUserId(), idInfo.getSalt()));
 			KeyInfo keyInfo = keyInfoMapper.readKeyInfo(hashed_id);
 			byte[] key = OpenCrypt.hexToByteArray(keyInfo.getKey());
 			String cUserPwd = OpenCrypt.aesEncrypt(member.getUserPassword(), key);
 			String hashed_cUserPwd = OpenCrypt.byteArrayToHex(OpenCrypt.getSHA256(cUserPwd, keyInfo.getSalt()));
-			member = memberMapper.readMember(member.getUserId(), hashed_cUserPwd);
-			if (member == null) {
+			Member userinfo = memberMapper.readMember(member.getUserId(), hashed_cUserPwd);
+			if (userinfo == null) {
 				logintryMapper.updateLointryFail(loginTry.getClient_ip(), loginTry.getUser_id());
 				throw new Exception("wrong password");
 			}
 			logintryMapper.updateLogintrySuccess(loginTry.getClient_ip(), loginTry.getUser_id());
-			return member;
+			return userinfo;
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 			throw new Exception("Server error");
@@ -107,6 +107,28 @@ public class MemberServiceImpl implements MemberService {
 			memberMapper.createMember(member);
 			idInfoMapper.createIdInfo(idInfo);
 			keyInfoMapper.createKeyInfo(keyInfo);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			throw new Exception("Server error");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new Exception("Server error");
+		}
+	}
+
+	@Override
+	public void updateMember(ModifyMember member) throws Exception {
+		try {
+			IdInfo idInfo = idInfoMapper.readIdInfo(member.getUserId());
+			byte[] hashed_id_byte = OpenCrypt.getSHA256(idInfo.getId(), idInfo.getSalt());
+			String hashed_id = OpenCrypt.byteArrayToHex(hashed_id_byte);
+			KeyInfo keyInfo = keyInfoMapper.readKeyInfo(hashed_id);
+			String pw_crypt = OpenCrypt.aesEncrypt(member.getNewPassword(),OpenCrypt.hexToByteArray(keyInfo.getKey()));
+			byte[] pw_hashed_byte = OpenCrypt.getSHA256(pw_crypt, keyInfo.getSalt());
+			String pw_hashed = OpenCrypt.byteArrayToHex(pw_hashed_byte);
+			member.setNewPassword(pw_hashed);
+			System.out.println(member);
+			memberMapper.updateMember(member);
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 			throw new Exception("Server error");

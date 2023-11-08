@@ -1,6 +1,7 @@
 package com.ssafy.enjoy.member.model.service;
 
 import com.ssafy.enjoy.member.model.Member;
+import com.ssafy.enjoy.member.model.ModifyMember;
 
 public interface MemberService {
 
@@ -9,5 +10,7 @@ public interface MemberService {
 	int idCheck(String id) throws Exception;
 
 	void joinMember(Member member) throws Exception;
+
+	void updateMember(ModifyMember member) throws Exception;
 
 }

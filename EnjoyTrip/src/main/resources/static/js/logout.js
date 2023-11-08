@@ -9,7 +9,7 @@ document.getElementById('logout-button').addEventListener('click', function(){
 		let msg = obj['msg'];
 		let detail = obj['detail'];
 		if(msg=='OK'){
-			document.getElementById('before-login').style.display='block';
+			document.getElementById('before-login').style.display='flex';
 			document.getElementById('after-login').style.display='none';
 			if(getCookie('saveid')!='ok'){
 				deleteCookie('id');
