@@ -9,4 +9,6 @@ public interface MapService {
 
 	List<Map> getGugun() throws Exception;
 
+	List search(Map map) throws Exception;
+
 }

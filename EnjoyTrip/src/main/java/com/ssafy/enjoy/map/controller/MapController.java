@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,6 +26,7 @@ public class MapController {
 			List<Map> list = mapService.getSido();
 			result.put("msg", "OK");
 			result.put("detail","loaded city info");
+			result.put("list", list);
 		}catch(Exception e) {
 			e.printStackTrace();
 			result.put("msg", "NO");
@@ -40,10 +42,27 @@ public class MapController {
 			List<Map> list = mapService.getGugun();
 			result.put("msg", "OK");
 			result.put("detail", "loaded section info");
+			result.put("list", list);
 		}catch(Exception e) {
 			e.printStackTrace();
 			result.put("msg", "NO");
 			result.put("detail", "fail to load section info");
+		}
+		return result;
+	}
+	
+	@GetMapping("/search")
+	public Map<String, Object> search(@RequestBody Map map){
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			List list = mapService.search(map);
+			result.put("msg", "OK");
+			result.put("detail", "loaded info");
+			result.put("list", list);
+		}catch(Exception e) {
+			e.printStackTrace();
+			result.put("msg", "NO");
+			result.put("detail", "fail to load info");
 		}
 		return result;
 	}

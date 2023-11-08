@@ -34,4 +34,15 @@ public class MapServiceImpl implements MapService {
 			throw new Exception("Server error");
 		}
 	}
+
+	@Override
+	public List search(Map map) throws Exception {
+		try {
+			return mapMapper.readMap(map);
+		}catch(SQLException e) {
+			e.printStackTrace();
+			throw new Exception("Server error");
+		}
+	}
+	
 }
