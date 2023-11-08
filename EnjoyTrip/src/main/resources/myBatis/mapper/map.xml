@@ -4,10 +4,14 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.enjoy.map.model.mapper.MapMapper">
 	<select id="readSido" resultMap="myMap">
-		select * from table
+		select `sido_code`, `sido_name` from `sido`
 	</select>
 	<select id="readGugun" resultMap="myMap">
-		select * from table
+		select `gugun_code`, `gugun_name`, `sido_code` from `gugun`
 	</select>
-	<select id="readMap" parameterType="map" resultMap="myMap"></select>
+	<select id="readMap" parameterType="map" resultMap="myMap">
+		select *
+		from table
+		where `sido_code`=#{sido_code} and `gugun_code`=#{gugun_code} and `content_type_Id`=#{content_type_Id}
+	</select>
 </mapper>
