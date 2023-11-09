@@ -13,4 +13,10 @@ public class CommentServiceImpl implements CommentService{
 		return null;
 	}
 
+	@Override
+	public void writeComment(Comment comment) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

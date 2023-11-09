@@ -51,10 +51,9 @@ public class CommentController {
 			result.put("detail", "fail to load comment");
 		} else {
 			try {
-				List<Comment> list = commentService.getList(board);
+				commentService.writeComment(comment);
 				result.put("msg", "OK");
 				result.put("detail", "fail to load comment");
-				result.put("list", list);
 
 			} catch (Exception e) {
 				e.printStackTrace();

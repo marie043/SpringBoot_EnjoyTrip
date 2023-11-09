@@ -7,6 +7,8 @@ import com.ssafy.enjoy.board.model.Comment;
 
 public interface CommentService {
 
-	List<Comment> getList(Board board) throws Exception ;
+	List<Comment> getList(Board board) throws Exception;
+
+	void writeComment(Comment comment) throws Exception;
 
 }
