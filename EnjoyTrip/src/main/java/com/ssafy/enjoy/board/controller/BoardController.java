@@ -67,6 +67,7 @@ public class BoardController {
 	@PostMapping("/detail")
 	public  Map<String, Object> getDetail(@RequestBody Board board){
 		Map<String, Object> result = new HashMap<String, Object>();
+		System.out.println(board);
 		if(board.getArticle_no() == 0) {
 			result.put("msg", "NO");
 			result.put("detail", "게시글을 불러올 수 없습니다.");
@@ -129,6 +130,7 @@ public class BoardController {
 	@PostMapping("/page")
 	public Map<String, Object> getPageNum(@RequestBody Page page){
 		Map<String, Object> result = new HashMap<String, Object>();
+		System.out.println(page);
 		if("".equals(page.getKey())) {
 			page.setKey(null);
 		}

@@ -5,7 +5,7 @@ document.getElementById('board-link').addEventListener('click', function(){
 	makeBoardList(1, '', '');
 });
 document.getElementById('board-search-btn').addEventListener('click', function(){
-	const word = document.getElementById('board-word');
+	const word = document.getElementById('board-word').value;
 	const key_select = document.getElementById('board-key');
 	const key = key_select[key_select.selectedIndex].value;
 	if(key==''||key==null){

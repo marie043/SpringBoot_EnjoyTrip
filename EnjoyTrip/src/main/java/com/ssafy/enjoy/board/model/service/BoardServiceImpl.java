@@ -89,7 +89,7 @@ public class BoardServiceImpl implements BoardService {
 		try {
 			if (page.getKey() != null) {
 				page.setWord("%" + page.getWord() + "%");
-				if (page.getKey().equals("subjet")) {
+				if (page.getKey().equals("subject")) {
 					return boardMapper.countBoardWithSubject(page) / SizeConstant.LIST_SIZE;
 				} else if (page.getKey().equals("content")) {
 					return boardMapper.countBoardWithContent(page) / SizeConstant.LIST_SIZE;
