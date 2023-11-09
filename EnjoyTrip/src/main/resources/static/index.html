@@ -178,14 +178,14 @@
 				</p>
 				<!-- 관광지 검색 start -->
 				<div class="d-flex my-3">
-					<select id="search-area" class="form-select me-2" onchange="changeGugun()">
+					<select id="search-area" class="form-select me-2">
 						<option value="" selected>검색 할 지역 선택</option>
 					</select> 
 					<select id="search-sigungu" class="form-select me-2">
 						<option value="" selected>시군구 선택</option>
 					</select> 
-					<select id="search-content-id" class="form-select me-2" onchange="mapChange()">
-						<option value="" selected>컨텐츠 선택</option>
+					<select id="search-content-id" class="form-select me-2">
+						<option value="" selected id="no-choice">컨텐츠 선택</option>
 						<option value="12">관광지</option>
 						<option value="14">문화시설</option>
 						<option value="15">행사/공연/축제</option>
@@ -390,5 +390,4 @@
 <script type="text/javascript" src="./js/join.js"></script>
 <script type="text/javascript" src="./js/logout.js"></script>
 <script type="text/javascript" src="./js/update.js"></script>
-<script type="text/javascript" src="./js/map.js"></script>
 </html>

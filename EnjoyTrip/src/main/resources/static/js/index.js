@@ -2,6 +2,8 @@ const ip = 'localhost';
 const session_check_url = 'http://'+ip+'/EnjoyTrip/user/session';
 const sido_url = 'http://'+ip+'/EnjoyTrip/map/sido';
 const gugun_url = 'http://'+ip+'/EnjoyTrip/map/gugun';
+const search_map_url = 'http://'+ip+'/EnjoyTrip/map/search';
+
 window.onload = function(){
 	changePage('home-page');
 }
@@ -15,11 +17,11 @@ document.getElementById('map-link').addEventListener('click', function(){
 	}).then(function(res){
 		return res.json();
 	}).then(function(obj){
-		console.log(obj);
 		const msg = obj['msg'];
 		const detail = obj['detail'];
-		const list = obj['sido'];
+		const list = obj['list'];
 		let select = document.getElementById('search-area');
+		select.addEventListener('change', changeGugun);
 		if(msg=='OK'){
 			list.forEach(function(item){
 				let option = document.createElement('option');
@@ -37,16 +39,17 @@ document.getElementById('map-link').addEventListener('click', function(){
 	}).then(function(res){
 		return res.json();
 	}).then(function(obj){
-		console.log(obj);
 		const msg = obj['msg'];
 		const detail = obj['detail'];
-		const list = obj['sido'];
+		const list = obj['list'];
 		let select = document.getElementById('search-sigungu');
+		select.addEventListener('change', showOption);
 		if(msg=='OK'){
 			list.forEach(function(item){
 				let option = document.createElement('option');
+				let sido_code = item['sido_code'];
 				option.value = item['gugun_code'];
-				option.setAttribute('class', `${item['sido_code']}`);
+				option.setAttribute('class', `${sido_code}`);
 				option.innerText = item['gugun_name'];
 				select.appendChild(option);
 			});
@@ -61,6 +64,9 @@ document.getElementById('map-link').addEventListener('click', function(){
 		level: 3,
 		mapTypeId: kakao.maps.MapTypeId.ROADMAP
 	});
+	changeGugun();
+	showOption();
+	document.getElementById('search-content-id').addEventListener('change', mapChange);
 });
 document.getElementById('board-link').addEventListener('click', function(){
 	changePage('board-page');
@@ -150,4 +156,62 @@ function changePage(pageId){
 function closeModal(){
 	document.getElementById('login-modal').style.display='none';
 	document.getElementById('join-modal').style.display='none';
+}
+function changeGugun(){
+	const select = document.getElementById('search-area');
+	const sido = select[select.selectedIndex].value;
+	document.querySelectorAll('#search-sigungu option').forEach(function(e){
+		if(e.getAttribute('class')==sido){
+			e.style.display = 'block';
+		}else{
+			e.style.display = 'none';
+		}
+	});
+	document.getElementById('search-sigungu').selectedIndex = 0;
+}
+function showOption(){
+	const select_gugun = document.getElementById('search-sigungu');
+	const gugun_code = select_gugun[select_gugun.selectedIndex].value;
+	let myStyle = 'block';
+	if(gugun_code==''||gugun_code==null){
+		myStyle = 'none';
+	}
+	document.querySelectorAll('#search-content-id option').forEach(function(option){
+		option.style.display = myStyle;
+	});
+
+	document.getElementById('search-content-id').selectedIndex = 0;
+}
+
+function mapChange(){
+	const select_sido = document.getElementById('search-area');
+	const sido_code = select_sido[select_sido.selectedIndex].value;
+	const select_gugun = document.getElementById('search-sigungu');
+	const gugun_code = select_gugun[select_gugun.selectedIndex].value;
+	const select_type = document.getElementById('search-content-id');
+	const content_type_id = select_type[select_type.selectedIndex].value;
+	if(content_type_id==''){
+		return;
+	}
+	fetch(search_map_url, {
+		method: 'POST',
+		headers: {'Content-Type': 'application/json'},
+		body: JSON.stringify({sido_code, gugun_code, content_type_id})
+	}).then(function(res){
+		return res.json();
+	}).then(function(obj){
+		const msg = obj['msg'];
+		const detail = obj['detail'];
+		let positions = [];
+		const list = ogj[list];
+		if(msg=='OK'){
+			for(let i=0;i<list.length;i++){
+				const pos = list[i];
+				console.log(pos);
+			}
+		}else{
+			alert('detail');
+		}
+		
+	});
 }
