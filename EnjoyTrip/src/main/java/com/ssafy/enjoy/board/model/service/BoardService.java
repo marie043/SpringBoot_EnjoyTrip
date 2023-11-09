@@ -17,4 +17,6 @@ public interface BoardService {
 
 	void deleteBoard(Board board) throws Exception;
 
+	int getPageNum() throws Exception ;
+
 }

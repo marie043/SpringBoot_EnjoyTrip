@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -125,6 +126,23 @@ public class BoardController {
 				result.put("msg", "NO");
 				result.put("detail", "fail to delete board detail");
 			}
+		}
+		return result;
+	}
+	
+	@GetMapping("/page")
+	public Map<String, Object> getPageNum(){
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			int pages = boardService.getPageNum();
+			Page page = new Page();
+			result.put("msg", "OK");
+			result.put("detail", "Success to load page nation");
+			result.put("pages", pages);
+		}catch(Exception e) {
+			e.printStackTrace();
+			result.put("msg", "NO");
+			result.put("detail", "fail to load page nation");
 		}
 		return result;
 	}
