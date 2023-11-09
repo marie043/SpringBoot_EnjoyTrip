@@ -39,11 +39,12 @@ create table key_info(
 `key` varchar(500) not null,
 primary key(`hashed_id`));
 
-create table comment_list(
-`idx` int auto_increment not null,
-`comment` varchar(1000) not null, 
-`user_name` varchar(20) not null,
-`article_no` int not null,
-primary key(`idx`),
-foreign key(`article_no`) references enjoytrip.board(`article_no`)
-);
+CREATE TABLE `comment` (
+  `idx` int NOT NULL AUTO_INCREMENT,
+  `content` varchar(1000) NOT NULL,
+  `user_name` varchar(20) NOT NULL,
+  `article_no` int NOT NULL,
+  PRIMARY KEY (`idx`),
+  KEY `article_no` (`article_no`),
+  CONSTRAINT `comment_list_ibfk_1` FOREIGN KEY (`article_no`) REFERENCES `board` (`article_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
