@@ -9,7 +9,7 @@
 		where `article_no`=#{article_no}
 		order by `idx` desc
 	</select>
-	<insert id="createCommnet" parameterType="commnet">
+	<insert id="createCommnet" parameterType="comment">
 		insert into `comment`(`article_no`, `user_id`, `content`)
 		values(#{article_no}, #{user_id}, #{content})
 	</insert>
