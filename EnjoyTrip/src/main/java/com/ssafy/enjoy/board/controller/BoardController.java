@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -124,7 +123,7 @@ public class BoardController {
 		return result;
 	}
 	
-	@GetMapping("/page")
+	@PostMapping("/page")
 	public Map<String, Object> getPageNum(@RequestBody Page page){
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {

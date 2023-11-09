@@ -69,9 +69,6 @@ document.getElementById('map-link').addEventListener('click', function(){
 	
 	document.getElementById('search-content-id').addEventListener('change', mapChange);
 });
-document.getElementById('board-link').addEventListener('click', function(){
-	changePage('board-page');
-});
 document.getElementById('update-link').addEventListener('click', function(){
 	changePage('update-page');
 	const login_name = document.getElementById('login-info-name').value;
