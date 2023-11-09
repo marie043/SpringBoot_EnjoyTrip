@@ -67,7 +67,6 @@ document.getElementById('map-link').addEventListener('click', function(){
 		mapTypeId: kakao.maps.MapTypeId.ROADMAP
 	});
 	
-	
 	document.getElementById('search-content-id').addEventListener('change', mapChange);
 });
 document.getElementById('board-link').addEventListener('click', function(){
@@ -206,32 +205,66 @@ function mapChange(){
 		const detail = obj['detail'];
 		let positions = [];
 		const list = obj['list'];
+		removeTbody();
+		const table = document.getElementById('map-table');
 		if(msg=='OK'){
+			table.style.display = 'block';
 			let trs = [];
+			let positions = [];
 			for(let i=0;i<list.length;i++){
 				const pos = list[i];
-				console.log(pos);
 				const tr = document.createElement('tr');
-				tr.appendChild(makeTd(pos['title']))
+				tr.appendChild(makeTd(pos['title']));
+				tr.appendChild(makeTd(pos['tel']));
+				tr.appendChild(makeTd(pos['addr1']));
+				trs.push(tr);
+				const position = new kakao.maps.LatLng(pos['latitude'], pos['longitude']);
+				positions.push(position);
 			}
-			appendToMap(trs);
+			appendTbody(trs);
+			makeMarkers(positions);
 		}else{
+			table.style.display = 'none';
 			alert(detail);
 		}
 		
 	});
 }
-function appendToMap(trs){
+function removeTbody(){
 	const tbody = document.getElementById('trip-list');
 	document.querySelectorAll('#trip-list tr').forEach(function(e){
-		tbody.removeChilde(e);
-	})
-	trs.forEach(function(e){
-		tbody.appendChilde(e);
-	})
+		tbody.removeChild(e);
+	});
+}
+function appendTbody(trs){
+	const tbody = document.getElementById('trip-list');
+	trs.forEach(function(tr){
+		tbody.appendChild(tr);
+	});
 }
 function makeTd(content){
 	const td = document.createElement('td');
 	td.innerText = content;
+	if(content==''){
+		td.innerText='-';
+	}
 	return td;
+}
+function makeMarkers(positions){
+	const mapContainer = document.getElementById('map');
+	const mapOption = {
+			center: positions[0], // 지도의 중심좌표
+	        level: 3 
+	}
+	const map = new kakao.maps.Map(mapContainer, mapOption);
+	const bounds = new kakao.maps.LatLngBounds();    
+	for(let i=0;i<positions.length;i++){
+		const pos = positions[i];
+		const marker = new kakao.maps.Marker({
+		    position: pos
+		});
+		marker.setMap(map);
+		bounds.extend(pos);
+	}
+	map.setBounds(bounds);
 }

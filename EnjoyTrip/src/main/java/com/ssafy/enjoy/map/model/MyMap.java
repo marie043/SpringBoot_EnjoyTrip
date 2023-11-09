@@ -13,7 +13,14 @@ public class MyMap {
 	private String zipcode;
 	private double latitude;
 	private double longitude;
+	private String tel;
 	
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	public String getTel() {
+		return tel;
+	}
 	public double getLatitude() {
 		return latitude;
 	}
@@ -26,7 +33,6 @@ public class MyMap {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-	private int tel;
 	@Override
 	public String toString() {
 		return "Map [sido_code=" + sido_code + ", sido_name=" + sido_name + ", gugun_code=" + gugun_code
@@ -93,11 +99,5 @@ public class MyMap {
 	}
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
-	}
-	public int getTel() {
-		return tel;
-	}
-	public void setTel(int tel) {
-		this.tel = tel;
 	}
 }
