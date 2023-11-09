@@ -11,7 +11,7 @@
 	</select>
 	<select id="readMap" parameterType="map" resultMap="myMap">
 		select *
-		from table
+		from attraction_info
 		where `sido_code`=#{sido_code} and `gugun_code`=#{gugun_code} and `content_type_Id`=#{content_type_Id}
 	</select>
 </mapper>

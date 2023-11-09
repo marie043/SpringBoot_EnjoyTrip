@@ -14,6 +14,6 @@ public interface MapMapper {
 
 	List<MyMap> readGugun() throws SQLException;
 
-	List readMap(MyMap map) throws SQLException;
+	List<MyMap> readMap(MyMap map) throws SQLException;
 
 }
