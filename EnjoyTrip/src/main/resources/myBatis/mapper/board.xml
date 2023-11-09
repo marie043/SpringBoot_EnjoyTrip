@@ -3,28 +3,30 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.enjoy.board.model.mapper.BoardMapper">
-	<select id="readBoard" parameterType="page" resultMap="board">
+<resultMap type="com.ssafy.enjoy.board.model.Board" id="boardDto"></resultMap>
+
+	<select id="readBoard" parameterType="page" resultMap="boardDto">
 		select *
 		from board
 		order by
 		article_no desc
 		limit #{start}, #{end}
 	</select>
-	<select id="readBoardWithSubject" parameterType="page" resultMap="board">
+	<select id="readBoardWithSubject" parameterType="page" resultMap="boardDto">
 		select *
 		from board
 		where subject like #{word}
 		order by article_no desc
 		limit #{start}, #{end}
 	</select>
-	<select id="readBoardWithContent" parameterType="page" resultMap="board">
+	<select id="readBoardWithContent" parameterType="page" resultMap="boardDto">
 		select *
 		from board
 		where content like #{word}
 		order by article_no desc
 		limit #{start}, #{end}
 	</select>
-	<select id="readBoardWithUserId" parameterType="page" resultMap="board">
+	<select id="readBoardWithUserId" parameterType="page" resultMap="boardDto">
 		select *
 		from board
 		where `user_id` like #{word}

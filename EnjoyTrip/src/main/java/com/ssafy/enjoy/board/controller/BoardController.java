@@ -27,10 +27,13 @@ public class BoardController {
 		if(page.getPgno()==0) {
 			page.setPgno(1);
 		}
+		if("".equals(page.getKey())) {
+			page.setKey(null);
+		}
 		try {
 			List<Board> list = boardService.getList(page);
 			result.put("msg", "OK");
-			result.put("detail", "fail to load board");
+			result.put("detail", "success to load board");
 			result.put("list", list);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -126,6 +129,9 @@ public class BoardController {
 	@PostMapping("/page")
 	public Map<String, Object> getPageNum(@RequestBody Page page){
 		Map<String, Object> result = new HashMap<String, Object>();
+		if("".equals(page.getKey())) {
+			page.setKey(null);
+		}
 		try {
 			int pages = boardService.getPageNum(page);
 			result.put("msg", "OK");

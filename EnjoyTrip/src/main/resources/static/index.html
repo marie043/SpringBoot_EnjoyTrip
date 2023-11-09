@@ -166,71 +166,67 @@
 			</div>
 		</div>
 		<!-- 업데이트 페이지 끝 -->
-		<!-- 게시판 페이지 시작 -->
-		<div class="content" id="board-page">
-			<!-- 게시글 리스트 페이지 시작 -->
-			<div id="board-list-page">
-				<div class="row justify-content-center">
-					<div class="col-lg-8 col-md-10 col-sm-12">
-						<h2 class="my-3 py-3 shadow-sm bg-light text-center">
-							<mark class="sky">글목록</mark>
-						</h2>
+
+		<!-- 게시글 목록 페이지 시작 -->
+		<div id="board-list-page" class='content row justify-content-center'>
+			<div class=" col-sm-12  col-md-10 col-lg-8">
+				<h2 class="my-3 py-3 shadow-sm bg-light text-center">
+					<mark class="sky">글목록</mark>
+				</h2>
+			</div>
+			<div class="col-sm-12  col-md-10 col-lg-8">
+				<div class="row align-self-center mb-2">
+					<div class="col-md-2">
+						<button type="button" id="btn-mv-register"
+							class="btn btn-outline-primary btn-sm">글쓰기</button>
 					</div>
-					<div class="col-lg-8 col-md-10 col-sm-12">
-						<div class="row align-self-center mb-2">
-							<div class="col-md-2 text-start">
-								<button type="button" id="btn-mv-register"
-									class="btn btn-outline-primary btn-sm">글쓰기</button>
-							</div>
-							<div class="col-md-7 offset-3">
-								<form class="d-flex" id="form-search" action="">
-									<input type="hidden" name="action" value="list" /> <input
-										type="hidden" name="pgno" value="1" /> <select name="key"
-										id="key" class="form-select form-select-sm ms-5 me-1 w-50"
-										aria-label="검색조건">
-										<option value="" selected>검색조건</option>
-										<option value="article_no">글번호</option>
-										<option value="subject">제목</option>
-										<option value="user_id">작성자</option>
-									</select>
-									<div class="input-group input-group-sm">
-										<input type="text" name="word" id="word" class="form-control"
-											placeholder="검색어..." />
-										<button id="btn-search" class="btn btn-dark" type="button">검색</button>
-									</div>
-								</form>
+					<div class="col-md-10">
+						<div class="d-flex" id="form-search">
+							<input type="hidden" name="action" value="list" /> <input
+								type="hidden" name="pgno" value="1" /> <select name="key"
+								id="board-key" class="form-select form-select-sm ms-5 me-1 w-50"
+								aria-label="검색조건">
+								<option value="" selected>검색조건</option>
+								<option value="content">내용</option>
+								<option value="subject">제목</option>
+								<option value="user_id">작성자</option>
+							</select>
+							<div class="input-group input-group-sm">
+								<input type="text" name="word" id="board-word"
+									class="form-control" placeholder="검색어..." />
+								<button id="board-search-btn" class="btn btn-dark" type="button">검색</button>
 							</div>
 						</div>
-						<table class="table table-hover">
-							<thead>
-								<tr class="text-center">
-									<th scope="col">글번호</th>
-									<th scope="col">제목</th>
-									<th scope="col">작성자</th>
-									<th scope="col">조회수</th>
-									<th scope="col">작성일</th>
-								</tr>
-							</thead>
-							<tbody id="board-list-tbody">
-							</tbody>
-						</table>
 					</div>
-					<div class="row" id="pagenation"></div>
 				</div>
+				<table class="table table-hover">
+					<thead>
+						<tr class="text-center">
+							<th scope="col">글번호</th>
+							<th scope="col">제목</th>
+							<th scope="col">작성자</th>
+							<th scope="col">조회수</th>
+							<th scope="col">작성일</th>
+						</tr>
+					</thead>
+					<tbody id="board-list-tbody">
+					</tbody>
+				</table>
 			</div>
+			<div class="row" id="pagenation"></div>
 		</div>
-		<!-- 게시글 리스트 페이지 끝 -->
-		<!-- 게시글 보기 페이지 시작 -->
-		<div id="board-detail-page"></div>
-		<!-- 게시글 보기 페이지 끝 -->
-		<!-- 게시글 작성 페이지 시작 -->
-		<div id=board-write-page"></div>
-		<!-- 게시글 작성 페이지 끝 -->
-		<!-- 게시글 수정 페이지 시작 -->
-		<div id="board-modify-page"></div>
-		<!-- 게시글 수정 페이지 끝 -->
 	</div>
-	<!-- 게시판 페이지 끝 -->
+	<!-- 게시글 목록 페이지 끝 -->
+
+	<!-- 게시글 보기 페이지 시작 -->
+	<div id="board-detail-page" class='content'></div>
+	<!-- 게시글 보기 페이지 끝 -->
+	<!-- 게시글 작성 페이지 시작 -->
+	<div id=board-write-page "  class='content'></div>
+	<!-- 게시글 작성 페이지 끝 -->
+	<!-- 게시글 수정 페이지 시작 -->
+	<div id="board-modify-page" class='content'></div>
+	<!-- 게시글 수정 페이지 끝 -->
 	<!-- 지도 페이지 시작 -->
 	<div class="content" id="map-page">
 		<div class="col-md-8 text-center mx-auto">
@@ -459,4 +455,5 @@
 <script type="text/javascript" src="./js/logout.js"></script>
 <script type="text/javascript" src="./js/update.js"></script>
 <script type="text/javascript" src="./js/board.js"></script>
+<script type="text/javascript" src="./js/map.js"></script>
 </html>
