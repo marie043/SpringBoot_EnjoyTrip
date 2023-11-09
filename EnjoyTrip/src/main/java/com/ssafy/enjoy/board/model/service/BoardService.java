@@ -15,4 +15,6 @@ public interface BoardService {
 
 	void modifyBoard(Board board) throws Exception;
 
+	void deleteBoard(Board board) throws Exception;
+
 }

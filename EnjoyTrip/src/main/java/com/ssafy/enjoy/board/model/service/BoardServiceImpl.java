@@ -33,5 +33,11 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void deleteBoard(Board board) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

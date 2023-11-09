@@ -103,4 +103,24 @@ public class BoardController {
 		}
 		return result;
 	}
+	
+	@PostMapping("/delete")
+	public  Map<String, Object> deleteBoard(@RequestBody Board board){
+		Map<String, Object> result = new HashMap<String, Object>();
+		if(board.getArticle_no() == 0) {
+			result.put("msg", "NO");
+			result.put("detail", "게시글을 삭제할 수 없습니다.");
+		}else {
+			try {
+				boardService.deleteBoard(board);
+				result.put("msg", "OK");
+				result.put("detail", "Success to delete board detail");
+			}catch(Exception e) {
+				e.printStackTrace();
+				result.put("msg", "NO");
+				result.put("detail", "fail to delete board detail");
+			}
+		}
+		return result;
+	}
 }
