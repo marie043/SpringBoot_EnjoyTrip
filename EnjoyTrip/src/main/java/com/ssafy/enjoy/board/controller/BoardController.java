@@ -113,8 +113,14 @@ public class BoardController {
 		}else {
 			try {
 				boardService.deleteBoard(board);
+				Page page = new Page();
+				page.setPgno(0);
+				page.setKey(null);
+				page.setWord(null);
+				List<Board> list = boardService.getList(page);
 				result.put("msg", "OK");
 				result.put("detail", "Success to delete board detail");
+				result.put("list", list);
 			}catch(Exception e) {
 				e.printStackTrace();
 				result.put("msg", "NO");
