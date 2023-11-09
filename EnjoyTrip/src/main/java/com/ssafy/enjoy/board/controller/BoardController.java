@@ -28,12 +28,6 @@ public class BoardController {
 		if(page.getPgno()==0) {
 			page.setPgno(1);
 		}
-		if(page.getKey()==null) {
-			page.setKey("");
-		}
-		if(page.getWord()==null) {
-			page.setWord("");
-		}
 		try {
 			List<Board> list = boardService.getList(page);
 			result.put("msg", "OK");
@@ -131,11 +125,10 @@ public class BoardController {
 	}
 	
 	@GetMapping("/page")
-	public Map<String, Object> getPageNum(){
+	public Map<String, Object> getPageNum(@RequestBody Page page){
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
-			int pages = boardService.getPageNum();
-			Page page = new Page();
+			int pages = boardService.getPageNum(page);
 			result.put("msg", "OK");
 			result.put("detail", "Success to load page nation");
 			result.put("pages", pages);
