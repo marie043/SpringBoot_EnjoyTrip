@@ -24,6 +24,15 @@ public class BoardController {
 	@PostMapping("/list")
 	public Map<String, Object> getList(@RequestBody Page page) {
 		Map<String, Object> result = new HashMap<String, Object>();
+		if(page.getPgno()==0) {
+			page.setPgno(1);
+		}
+		if(page.getKey()==null) {
+			page.setKey("");
+		}
+		if(page.getWord()==null) {
+			page.setWord("");
+		}
 		try {
 			List<Board> list = boardService.getList(page);
 			result.put("msg", "OK");
