@@ -53,6 +53,8 @@ document.getElementById('map-link').addEventListener('click', function(){
 				option.innerText = item['gugun_name'];
 				select.appendChild(option);
 			});
+			changeGugun();
+			showOption();
 		}else{
 			alert(detail);
 			changePage('home-page');
@@ -64,8 +66,8 @@ document.getElementById('map-link').addEventListener('click', function(){
 		level: 3,
 		mapTypeId: kakao.maps.MapTypeId.ROADMAP
 	});
-	changeGugun();
-	showOption();
+	
+	
 	document.getElementById('search-content-id').addEventListener('change', mapChange);
 });
 document.getElementById('board-link').addEventListener('click', function(){
@@ -203,15 +205,33 @@ function mapChange(){
 		const msg = obj['msg'];
 		const detail = obj['detail'];
 		let positions = [];
-		const list = ogj[list];
+		const list = obj['list'];
 		if(msg=='OK'){
+			let trs = [];
 			for(let i=0;i<list.length;i++){
 				const pos = list[i];
 				console.log(pos);
+				const tr = document.createElement('tr');
+				tr.appendChild(makeTd(pos['title']))
 			}
+			appendToMap(trs);
 		}else{
-			alert('detail');
+			alert(detail);
 		}
 		
 	});
+}
+function appendToMap(trs){
+	const tbody = document.getElementById('trip-list');
+	document.querySelectorAll('#trip-list tr').forEach(function(e){
+		tbody.removeChilde(e);
+	})
+	trs.forEach(function(e){
+		tbody.appendChilde(e);
+	})
+}
+function makeTd(content){
+	const td = document.createElement('td');
+	td.innerText = content;
+	return td;
 }
