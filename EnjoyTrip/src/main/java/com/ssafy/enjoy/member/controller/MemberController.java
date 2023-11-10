@@ -7,11 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.ssafy.enjoy.member.model.Member;
 import com.ssafy.enjoy.member.model.ModifyMember;
@@ -19,6 +15,7 @@ import com.ssafy.enjoy.member.model.service.MemberService;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin(origins = "*") // 클레스에서 설정
 public class MemberController {
 
 	@Autowired
@@ -57,13 +54,14 @@ public class MemberController {
 		if(member.getUserId()==null||member.getUserPassword()==null) {
 			result.put("msg", "NO");
 			result.put("detail", "no id or no pw");
-		}else {
+		} else {
 			try {
 				Member userinfo = memberService.loginMember(member, ip);
 				userinfo.setUserPassword(member.getUserPassword());
 				session.setAttribute("userinfo", userinfo);
 				result.put("msg", "OK");
 				result.put("detail", "login success");
+//				result.put("detail","on Test config all req is OK");
 				result.put("name", userinfo.getUserName());
 				result.put("email_id", userinfo.getEmailId());
 				result.put("email_domain", userinfo.getEmailDomain());
@@ -75,12 +73,14 @@ public class MemberController {
 		}
 		return result;
 	}
+
 	@PostMapping("/idCheck")
 	public Map<String, String> idCheck(@RequestBody String id){
 		Map<String, String> result = new HashMap<String, String>();
 		if(id==null) {
 			result.put("msg", "NO");
 			result.put("detail", "no id");
+			return result;
 		}
 		try {
 			if(memberService.idCheck(id)==0) {
@@ -95,6 +95,8 @@ public class MemberController {
 			result.put("msg", "No");
 			result.put("detail", e.getMessage());
 		}
+//		result.put("msg","OK");
+//		result.put("detail","on Test config all req is OK");
 		return result;
 	}
 	
@@ -109,6 +111,7 @@ public class MemberController {
 				memberService.joinMember(member);
 				result.put("msg", "OK");
 				result.put("detail", "회원가입 성공");
+//				result.put("detail","on Test config all req is OK");
 			}catch(Exception e) {
 				e.printStackTrace();
 				result.put("msg", "NO");

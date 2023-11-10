@@ -29,7 +29,7 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public void writeComment(Comment comment) throws Exception {
 		try {
-			commentMapper.creatComment(comment);
+			commentMapper.createComment(comment);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new Exception("Server error");
