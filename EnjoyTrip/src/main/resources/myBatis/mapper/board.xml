@@ -34,8 +34,8 @@
 		limit #{start}, #{end}
 	</select>
 	<insert id="createBoard" parameterType="board">
-		insert into board(`article_no`, `user_id`, `subject`, `content`)
-		values(#{article_no}, #{user_id}, #{subject}, #{content})
+		insert into board( `user_id`, `subject`, `content`)
+		values(#{user_id}, #{subject}, #{content})
 	</insert>
 	<select id="readBoardDetail" parameterType="board" resultType="board">
 		select *
@@ -44,7 +44,7 @@
 	</select>
 	<update id="updateBoard" parameterType="board">
 		update board
-		set `subejct`=#{subject}, `content`=#{content}
+		set `subject`=#{subject}, `content`=#{content}
 		where `article_no`=#{article_no} and `user_id`=#{user_id}
 	</update>
 	<delete id="deleteMapper">

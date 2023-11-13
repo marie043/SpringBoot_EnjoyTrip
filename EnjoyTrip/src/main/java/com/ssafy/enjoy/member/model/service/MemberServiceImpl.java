@@ -51,6 +51,7 @@ public class MemberServiceImpl implements MemberService {
 				loginTry = logintryMapper.readLoginTry(ip, member.getUserId());
 			}
 			if (memberMapper.idCheck(member.getUserId()) != 1) {
+//				System.out.println(member.getUserId());
 				throw new Exception("no such user");
 			}
 			IdInfo idInfo = idInfoMapper.readIdInfo(member.getUserId());
